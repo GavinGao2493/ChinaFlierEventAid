@@ -14,7 +14,8 @@ namespace ConsoleVersion
             {
                 string content = await GetWebContent(url);
 
-                Console.WriteLine(content);
+                //Console.WriteLine(content);
+                AircraftList aircraftList = new AircraftList(content);
             }
             catch (Exception ex)
             {
