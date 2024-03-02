@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Text;
 using Newtonsoft.Json;
-
 namespace ConsoleVersion
 {   
     /// <summary>
@@ -41,8 +40,10 @@ namespace ConsoleVersion
         public string Callsign = "";
         /// <summary>
         /// 席位类型
+        /// GND->0
         /// TWR->0
         /// APP->5
+        /// CTR->5
         /// </summary>
         public int FIRType;
         /// <summary>
@@ -71,6 +72,10 @@ namespace ConsoleVersion
         public AtcList(string jsonString)
         {
             atcList = JsonConvert.DeserializeObject<List<AtcInfo>>(jsonString);
+        }
+        public List<AtcInfo>? GetAtcList()
+        {
+            return atcList;
         }
     }
 }

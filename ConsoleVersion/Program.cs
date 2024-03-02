@@ -2,6 +2,8 @@
 using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using NPOI.HSSF.UserModel;
+using NPOI.SS.UserModel;
 namespace ConsoleVersion
 {
     class Program
@@ -19,6 +21,7 @@ namespace ConsoleVersion
                 //Console.WriteLine(content);
                 AircraftList aircraftList = new AircraftList(contentAircraftList);
                 AtcList atcList = new AtcList(contentAtcList);
+                ExportToExcel.AtcListToExcel(atcList.GetAtcList());
             }
             catch (Exception ex)
             {
