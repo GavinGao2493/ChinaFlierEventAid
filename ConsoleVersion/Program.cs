@@ -8,14 +8,17 @@ namespace ConsoleVersion
     {
         static async Task Main(string[] args)
         {
-            string url = "https://map.chinaflier.com/airline_list";
+            string urlAircraftList = "https://map.chinaflier.com/airline_list";
+            string urlAtcList = "https://map.chinaflier.com/atc_list";
 
             try
             {
-                string content = await GetWebContent(url);
+                string contentAircraftList = await GetWebContent(urlAircraftList);
+                string contentAtcList = await GetWebContent(urlAtcList);
 
                 //Console.WriteLine(content);
-                AircraftList aircraftList = new AircraftList(content);
+                AircraftList aircraftList = new AircraftList(contentAircraftList);
+                AtcList atcList = new AtcList(contentAtcList);
             }
             catch (Exception ex)
             {
