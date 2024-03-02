@@ -59,7 +59,7 @@ namespace ConsoleVersion
         /// </summary>
         public string LNG = "";
         /// <summary>
-        /// 用户UID
+        /// 用户编号
         /// </summary>
         public string UID = "";
     }

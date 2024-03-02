@@ -6,13 +6,20 @@ using System.Threading.Tasks;
 using System.IO;
 using NPOI.HSSF.UserModel;
 using NPOI.SS.UserModel;
+using NPOI.SS.Util;
 namespace ConsoleVersion
 {
     internal class ExportToExcel
     {
-        public static bool AtcListToExcel(List<AtcInfo>? list)
+        /// <summary>
+        /// 简单地全部导出
+        /// </summary>
+        /// <param name="atcList"></param>
+        /// <returns></returns>
+        public static bool AtcListToExcel(List<AtcInfo>? atcList)
         {
-            if (list == null)   return false;
+            if (atcList == null)   return false;
+            
             bool result = false;
             IWorkbook workbook = new HSSFWorkbook();
             ISheet sheet = workbook.CreateSheet("Sheet1");// 创建一个名称为Sheet1的表;
@@ -20,11 +27,159 @@ namespace ConsoleVersion
             row.CreateCell(0).SetCellValue("席位名称"); // 第一列标题
             row.CreateCell(1).SetCellValue("用户编号"); // 第二列标题
             //每一行依次写入
-            for (int i = 0; i < list.Count; i++)
+            for (int i = 0; i < atcList.Count; i++)
             {
                 row = sheet.CreateRow(i + 1);   //i+1:从第二行开始写入(第一行可同理写标题)，i从第一行写入
-                row.CreateCell(0).SetCellValue(list[i].Callsign);//第一列的值
-                row.CreateCell(1).SetCellValue(list[i].UID);//第二列的值
+                row.CreateCell(0).SetCellValue(atcList[i].Callsign);//第一列的值
+                row.CreateCell(1).SetCellValue(atcList[i].UID);//第二列的值
+            }
+            //文件写入的位置
+            using (FileStream fs = File.OpenWrite(@"AtcList.xls"))
+            {
+                workbook.Write(fs);//向打开的这个xls文件中写入数据  
+                result = true;
+            }
+            return result;
+        }
+        /// <summary>
+        /// 设置了起飞落地机场信息的导出
+        /// </summary>
+        /// <param name="atcList"></param>
+        /// <param name="AirportD">起飞机场</param>
+        /// <param name="AirportA">落地机场</param>
+        /// <returns></returns>
+        public static bool AtcListToExcel(List<AtcInfo>? atcList, string AirportD, string AirportA)
+        {
+            if (atcList == null) return false;
+
+            bool result = false;
+            IWorkbook workbook = new HSSFWorkbook();
+            ISheet sheet = workbook.CreateSheet("Sheet1");// 创建一个名称为Sheet1的表;
+            IRow row = sheet.CreateRow(0);// 第一行写标题
+
+            for (int i = 0; i < 12; i++)
+                sheet.SetColumnWidth(i, (int)(118 / 8.43 * 256));
+
+            // 下面间隔添加是因为后续合并单元格
+            row.CreateCell(0).SetCellValue("场面席位"); // 第一列标题
+            row.CreateCell(2).SetCellValue("终端席位"); // 第三列标题
+            row.CreateCell(4).SetCellValue("高空席位"); // 第五列标题
+            row.CreateCell(6).SetCellValue("终端席位"); // 第七列标题
+            row.CreateCell(8).SetCellValue("场面席位"); // 第九列标题
+
+            // 下面开始合并单元格
+            CellRangeAddress mergedRegion = new CellRangeAddress(0, 0, 0, 1);
+            sheet.AddMergedRegion(mergedRegion);
+            mergedRegion = new CellRangeAddress(0, 0, 2, 3);
+            sheet.AddMergedRegion(mergedRegion);
+            mergedRegion = new CellRangeAddress(0, 0, 4, 5);
+            sheet.AddMergedRegion(mergedRegion);
+            mergedRegion = new CellRangeAddress(0, 0, 6, 7);
+            sheet.AddMergedRegion(mergedRegion);
+            mergedRegion = new CellRangeAddress(0, 0, 8, 9);
+            sheet.AddMergedRegion(mergedRegion);
+
+            // 初始化各类型席位数目
+            int rowTwrD = 0;    int rowTmaD = 0;
+            int rowTwrA = 0;    int rowTmaA = 0;
+            int rowCtr = 0;     int rowUnclassfied = 0;
+            bool unclassfiedFlag = false;
+
+            // 依次写入数据
+            for (int i = 0; i < atcList.Count; i++)
+            {
+                if (atcList[i].Callsign.Contains("DEL") || atcList[i].Callsign.Contains("DLV")
+                        || atcList[i].Callsign.Contains("APN") || atcList[i].Callsign.Contains("RAMP")
+                        || atcList[i].Callsign.Contains("GND") || atcList[i].Callsign.Contains("TWR"))
+                    if (atcList[i].Callsign.Contains(AirportD))
+                    {
+                        row = sheet.GetRow(++rowTwrD);
+                        if (row == null)
+                            row = sheet.CreateRow(rowTwrD);
+                        row.CreateCell(0).SetCellValue(atcList[i].Callsign);
+                        row.CreateCell(1).SetCellValue(atcList[i].UID);
+                    }
+                    else if (atcList[i].Callsign.Contains(AirportA))
+                    {
+                        row = sheet.GetRow(++rowTwrA);
+                        if (row == null)
+                            row = sheet.CreateRow(rowTwrA);
+                        row.CreateCell(8).SetCellValue(atcList[i].Callsign);
+                        row.CreateCell(9).SetCellValue(atcList[i].UID);
+                    }
+                    else
+                    {
+                        if (!unclassfiedFlag)
+                        {
+                            unclassfiedFlag = true;
+                            row = sheet.GetRow(0);
+                            row.CreateCell(10).SetCellValue("无法自动分类席位"); // 第十一列标题
+                            mergedRegion = new CellRangeAddress(0, 0, 10, 11);
+                            sheet.AddMergedRegion(mergedRegion);
+                        }
+                        row = sheet.GetRow(++rowUnclassfied);
+                        if (row == null)
+                            row = sheet.CreateRow(rowUnclassfied);
+                        row.CreateCell(10).SetCellValue(atcList[i].Callsign);
+                        row.CreateCell(11).SetCellValue(atcList[i].UID);
+                    }
+                else if (atcList[i].Callsign.Contains("APP"))
+                    if (atcList[i].Callsign.Contains(AirportD))
+                    {
+                        row = sheet.GetRow(++rowTmaD);
+                        if (row == null)
+                            row = sheet.CreateRow(rowTmaD);
+                        row.CreateCell(2).SetCellValue(atcList[i].Callsign);
+                        row.CreateCell(3).SetCellValue(atcList[i].UID);
+                    }
+                    else if (atcList[i].Callsign.Contains(AirportA))
+                    {
+                        row = sheet.GetRow(++rowTmaA);
+                        if (row == null)
+                            row = sheet.CreateRow(rowTmaA);
+                        row.CreateCell(6).SetCellValue(atcList[i].Callsign);
+                        row.CreateCell(7).SetCellValue(atcList[i].UID);
+                    }
+                    else
+                    {
+                        if (!unclassfiedFlag)
+                        {
+                            unclassfiedFlag = true;
+                            row = sheet.GetRow(0);
+                            row.CreateCell(10).SetCellValue("无法自动分类席位"); // 第十一列标题
+                            mergedRegion = new CellRangeAddress(0, 0, 10, 11);
+                            sheet.AddMergedRegion(mergedRegion);
+                        }
+                        row = sheet.GetRow(++rowUnclassfied);
+                        if (row == null)
+                            row = sheet.CreateRow(rowUnclassfied);
+                        row.CreateCell(10).SetCellValue(atcList[i].Callsign);
+                        row.CreateCell(11).SetCellValue(atcList[i].UID);
+                    }
+                else if (atcList[i].Callsign.Contains("CTR"))
+                {
+                    row = sheet.GetRow(++rowCtr);
+                    if (row == null)
+                        row = sheet.CreateRow(rowCtr);
+                    row.CreateCell(4).SetCellValue(atcList[i].Callsign);
+                    row.CreateCell(5).SetCellValue(atcList[i].UID);
+                }
+                else
+                {
+                    if (!unclassfiedFlag)
+                    {
+                        unclassfiedFlag = true;
+                        row = sheet.GetRow(0);
+                        row.CreateCell(10).SetCellValue("无法自动分类席位"); // 第十一列标题
+                        mergedRegion = new CellRangeAddress(0, 0, 10, 11);
+                        sheet.AddMergedRegion(mergedRegion);
+                    }
+                    row = sheet.GetRow(++rowUnclassfied);
+                    if (row == null)
+                        row = sheet.CreateRow(rowUnclassfied);
+                    row.CreateCell(10).SetCellValue(atcList[i].Callsign);
+                    row.CreateCell(11).SetCellValue(atcList[i].UID);
+                }
             }
             //文件写入的位置
             using (FileStream fs = File.OpenWrite(@"AtcList.xls"))
