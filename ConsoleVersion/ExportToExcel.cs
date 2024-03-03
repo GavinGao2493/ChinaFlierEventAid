@@ -48,7 +48,7 @@ namespace ConsoleVersion
         /// <param name="AirportD">起飞机场</param>
         /// <param name="AirportA">落地机场</param>
         /// <returns></returns>
-        public static bool AtcListToExcel(List<AtcInfo>? atcList, string AirportD, string AirportA)
+        public static bool AtcListToExcel(List<AtcInfo>? atcList, List<string> AirportDs, List<string> AirportAs)
         {
             if (atcList == null) return false;
 
@@ -92,7 +92,7 @@ namespace ConsoleVersion
                 if (atcList[i].Callsign.Contains("DEL") || atcList[i].Callsign.Contains("DLV")
                         || atcList[i].Callsign.Contains("APN") || atcList[i].Callsign.Contains("RAMP")
                         || atcList[i].Callsign.Contains("GND") || atcList[i].Callsign.Contains("TWR"))
-                    if (atcList[i].Callsign.Contains(AirportD))
+                    if (IsCallsignContainingAirport(atcList[i].Callsign, AirportDs))
                     {
                         row = sheet.GetRow(++rowTwrD);
                         if (row == null)
@@ -100,7 +100,7 @@ namespace ConsoleVersion
                         row.CreateCell(0).SetCellValue(atcList[i].Callsign);
                         row.CreateCell(1).SetCellValue(atcList[i].UID);
                     }
-                    else if (atcList[i].Callsign.Contains(AirportA))
+                    else if (IsCallsignContainingAirport(atcList[i].Callsign, AirportAs))
                     {
                         row = sheet.GetRow(++rowTwrA);
                         if (row == null)
@@ -125,7 +125,7 @@ namespace ConsoleVersion
                         row.CreateCell(11).SetCellValue(atcList[i].UID);
                     }
                 else if (atcList[i].Callsign.Contains("APP"))
-                    if (atcList[i].Callsign.Contains(AirportD))
+                    if (IsCallsignContainingAirport(atcList[i].Callsign, AirportDs))
                     {
                         row = sheet.GetRow(++rowTmaD);
                         if (row == null)
@@ -133,7 +133,7 @@ namespace ConsoleVersion
                         row.CreateCell(2).SetCellValue(atcList[i].Callsign);
                         row.CreateCell(3).SetCellValue(atcList[i].UID);
                     }
-                    else if (atcList[i].Callsign.Contains(AirportA))
+                    else if (IsCallsignContainingAirport(atcList[i].Callsign, AirportAs))
                     {
                         row = sheet.GetRow(++rowTmaA);
                         if (row == null)
@@ -226,6 +226,19 @@ namespace ConsoleVersion
                 result = true;
             }
             return result;
+        }
+        /// <summary>
+        /// 判断呼号内是否包含机场ICAO码
+        /// </summary>
+        /// <param name="callsign">管制席位呼号</param>
+        /// <param name="airports">包含机场名的列表</param>
+        /// <returns></returns>
+        static bool IsCallsignContainingAirport(string callsign, List<string> airports)
+        {
+            foreach (string airport in airports)
+                if (callsign.Contains(airport))
+                    return true;
+            return false;
         }
     }
 }
