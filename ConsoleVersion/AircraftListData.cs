@@ -144,7 +144,7 @@ namespace ConsoleVersion
     /// </summary>
     class AircraftList
     {
-        List<Aircraft>? aircrafts = new List<Aircraft>();
+        List<Aircraft>? aircrafts;
         public AircraftList(string jsonString)
         {
             aircrafts = JsonConvert.DeserializeObject<List<Aircraft>>(jsonString);
@@ -152,6 +152,28 @@ namespace ConsoleVersion
         public List<Aircraft>? GetAircraftsList()
         {
             return aircrafts;
+        }
+        /// <summary>
+        /// 取在用户设定的检查点附近的机组
+        /// </summary>
+        /// <param name="LAT">纬度</param>
+        /// <param name="LNG">经度</param>
+        /// <param name="altLow">最低检测高度，单位为ft</param>
+        /// <param name="altHigh">最高检测高度，单位为ft</param>
+        /// <param name="range">检测范围，单位为km</param>
+        /// <returns></returns>
+        public List<Aircraft>? GetInGivenAreaAircraft(double LAT, double LNG, int altLow, int altHigh, int range)
+        {
+            if (aircrafts == null)
+                return null;
+            List<Aircraft> output = new List<Aircraft>();
+            foreach (var aircraft in aircrafts)
+            {
+                double distance = HaversineDistance.CalcDistance(LAT, LNG, double.Parse(aircraft.LAT), double.Parse(aircraft.LNG));
+                if (distance <= range && int.Parse(aircraft.Altitude) >= altLow && int.Parse(aircraft.Altitude) <= altHigh)
+                    output.Add(aircraft);
+            }
+            return output;
         }
     }
 }
