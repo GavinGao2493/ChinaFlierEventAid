@@ -65,7 +65,7 @@ namespace ConsoleVersion
         /// </summary>
         public string IATACallsign = "";
         /// <summary>
-        /// 飞行员编号
+        /// 内部使用的航班编号
         /// </summary>
         public int ID;
         /// <summary>
@@ -131,7 +131,7 @@ namespace ConsoleVersion
         /// </summary>
         public int Squawk;
         /// <summary>
-        /// 用户UID
+        /// 用户编号
         /// </summary>
         public string UID = "";
         /// <summary>
@@ -148,6 +148,10 @@ namespace ConsoleVersion
         public AircraftList(string jsonString)
         {
             aircrafts = JsonConvert.DeserializeObject<List<Aircraft>>(jsonString);
+        }
+        public List<Aircraft>? GetAircraftsList()
+        {
+            return aircrafts;
         }
     }
 }

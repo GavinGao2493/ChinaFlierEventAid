@@ -22,6 +22,7 @@ namespace ConsoleVersion
                 AircraftList aircraftList = new AircraftList(contentAircraftList);
                 AtcList atcList = new AtcList(contentAtcList);
                 ExportToExcel.AtcListToExcel(atcList.GetAtcList(), "ZJHK", "ZSNB");
+                ExportToExcel.AircraftListToExcel(aircraftList.GetAircraftsList());
             }
             catch (Exception ex)
             {

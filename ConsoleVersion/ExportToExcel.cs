@@ -12,7 +12,7 @@ namespace ConsoleVersion
     internal class ExportToExcel
     {
         /// <summary>
-        /// 简单地全部导出
+        /// 导出所有在线管制员列表
         /// </summary>
         /// <param name="atcList"></param>
         /// <returns></returns>
@@ -57,6 +57,7 @@ namespace ConsoleVersion
             ISheet sheet = workbook.CreateSheet("Sheet1");// 创建一个名称为Sheet1的表;
             IRow row = sheet.CreateRow(0);// 第一行写标题
 
+            // 设置适配于策划案的列宽
             for (int i = 0; i < 12; i++)
                 sheet.SetColumnWidth(i, (int)(118 / 8.43 * 256));
 
@@ -185,6 +186,43 @@ namespace ConsoleVersion
             using (FileStream fs = File.OpenWrite(@"AtcList.xls"))
             {
                 workbook.Write(fs);//向打开的这个xls文件中写入数据  
+                result = true;
+            }
+            return result;
+        }
+        /// <summary>
+        /// 导出所有在线机组列表
+        /// </summary>
+        /// <param name="aircraftList"></param>
+        /// <returns></returns>
+        public static bool AircraftListToExcel(List<Aircraft>? aircraftList)
+        {
+            if (aircraftList == null) return false;
+
+            bool result = false;
+            IWorkbook workbook = new HSSFWorkbook();
+            ISheet sheet = workbook.CreateSheet("Sheet1");  // 创建一个名称为Sheet1的表;
+            IRow row = sheet.CreateRow(0);  // 第一行写标题
+            row.CreateCell(0).SetCellValue("机组呼号"); // 第一列标题
+            row.CreateCell(1).SetCellValue("用户编号"); // 第二列标题
+            row.CreateCell(2).SetCellValue("起飞机场"); // 第三列标题
+            row.CreateCell(3).SetCellValue("落地机场"); // 第四列标题
+            row.CreateCell(4).SetCellValue("机型");     // 第五列标题
+
+            //每一行依次写入
+            for (int i = 0; i < aircraftList.Count; i++)
+            {
+                row = sheet.CreateRow(i + 1);   // i+1:从第二行开始写入(第一行可同理写标题)，i从第一行写入
+                row.CreateCell(0).SetCellValue(aircraftList[i].Callsign);   // 第一列的值
+                row.CreateCell(1).SetCellValue(aircraftList[i].UID);        // 第二列的值
+                row.CreateCell(2).SetCellValue(aircraftList[i].AirportD);   // 第三列的值
+                row.CreateCell(3).SetCellValue(aircraftList[i].AirportA);   // 第四列的值
+                row.CreateCell(4).SetCellValue(aircraftList[i].Model);      // 第五列的值
+            }
+            // 文件写入的位置
+            using (FileStream fs = File.OpenWrite(@"AircraftList.xls"))
+            {
+                workbook.Write(fs); // 向打开的这个xls文件中写入数据  
                 result = true;
             }
             return result;
