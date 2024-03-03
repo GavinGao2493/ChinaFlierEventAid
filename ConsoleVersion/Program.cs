@@ -28,7 +28,10 @@ namespace ConsoleVersion
                 ExportToExcel.AtcListToExcel(atcList.GetAtcList(), AirportDs, AirportAs);
                 ExportToExcel.AircraftListToExcel(aircraftList.GetAircraftsList());
 
-                List<Aircraft>? selectedAircrafts = aircraftList.GetInGivenAreaAircraft(31.2873, 121.877, 0, 45100, 1000);
+                List<Aircraft>? selectedAircrafts = aircraftList.GetInGivenAreaAircraft(23.383, 113.302, 0, 45100, 100);
+                CheckPoint checkPoint1 = new CheckPoint("CheckPoint1");
+                checkPoint1.UpdateCheckedAircraft(selectedAircrafts);
+                ExportToExcel.CheckPointToExcel(checkPoint1);
             }
             catch (Exception ex)
             {
