@@ -27,6 +27,8 @@ namespace ConsoleVersion
 
                 ExportToExcel.AtcListToExcel(atcList.GetAtcList(), AirportDs, AirportAs);
                 ExportToExcel.AircraftListToExcel(aircraftList.GetAircraftsList());
+
+                List<Aircraft>? selectedAircrafts = aircraftList.GetInGivenAreaAircraft(31.2873, 121.877, 0, 45100, 1000);
             }
             catch (Exception ex)
             {

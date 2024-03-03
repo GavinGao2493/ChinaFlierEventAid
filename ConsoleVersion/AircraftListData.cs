@@ -88,6 +88,8 @@ namespace ConsoleVersion
                     modifiedModel = value.Substring(3);
                 else
                     modifiedModel = value;
+                if (modifiedModel == "737")
+                    modifiedModel = "B737";
             }
         }
         /// <summary>
