@@ -227,6 +227,11 @@ namespace ConsoleVersion
             }
             return result;
         }
+        /// <summary>
+        /// 导出进入离开指定检查点的机组信息
+        /// </summary>
+        /// <param name="checkPoint"></param>
+        /// <returns></returns>
         public static bool CheckPointToExcel(CheckPoint? checkPoint)
         {
             if (checkPoint ==  null)    return false;
