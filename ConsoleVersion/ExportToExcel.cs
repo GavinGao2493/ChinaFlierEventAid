@@ -232,41 +232,45 @@ namespace ConsoleVersion
         /// </summary>
         /// <param name="checkPoint"></param>
         /// <returns></returns>
-        public static bool CheckPointToExcel(CheckPoint? checkPoint)
+        public static bool CheckPointsToExcel(List<CheckPoint> checkPoints)
         {
-            if (checkPoint ==  null)    return false;
+            if (checkPoints.Count ==  0)    return false;
 
-            List<CheckRecords> aircraftList = checkPoint.GetCheckPoinrRecords();
-            bool result = false;
-            IWorkbook workbook = new HSSFWorkbook();
-            ISheet sheet = workbook.CreateSheet("Sheet1");  // 创建一个名称为Sheet1的表;
-            IRow row = sheet.CreateRow(0);  // 第一行写标题
-            row.CreateCell(0).SetCellValue("机组呼号"); // 第一列标题
-            row.CreateCell(1).SetCellValue("用户编号"); // 第二列标题
-            row.CreateCell(2).SetCellValue("起飞机场"); // 第三列标题
-            row.CreateCell(3).SetCellValue("落地机场"); // 第四列标题
-            row.CreateCell(4).SetCellValue("进入时间"); // 第五列标题
-            row.CreateCell(5).SetCellValue("离开时间"); // 第六列标题
+            foreach (var checkPoint in checkPoints)
+            {
+                bool result = false;
+                List<CheckRecords> aircraftList = checkPoint.GetCheckPoinrRecords();
+                IWorkbook workbook = new HSSFWorkbook();
+                ISheet sheet = workbook.CreateSheet("Sheet1");  // 创建一个名称为Sheet1的表;
+                IRow row = sheet.CreateRow(0);  // 第一行写标题
+                row.CreateCell(0).SetCellValue("机组呼号"); // 第一列标题
+                row.CreateCell(1).SetCellValue("用户编号"); // 第二列标题
+                row.CreateCell(2).SetCellValue("起飞机场"); // 第三列标题
+                row.CreateCell(3).SetCellValue("落地机场"); // 第四列标题
+                row.CreateCell(4).SetCellValue("进入时间"); // 第五列标题
+                row.CreateCell(5).SetCellValue("离开时间"); // 第六列标题
 
-            //每一行依次写入
-            for (int i = 0; i < aircraftList.Count; i++)
-            {
-                row = sheet.CreateRow(i + 1);   // i+1:从第二行开始写入(第一行可同理写标题)，i从第一行写入
-                row.CreateCell(0).SetCellValue(aircraftList[i].aircraft.Callsign);   // 第一列的值
-                row.CreateCell(1).SetCellValue(aircraftList[i].aircraft.UID);        // 第二列的值
-                row.CreateCell(2).SetCellValue(aircraftList[i].aircraft.AirportD);   // 第三列的值
-                row.CreateCell(3).SetCellValue(aircraftList[i].aircraft.AirportA);   // 第四列的值
-                (DateTime inboundTime, DateTime outbounTime) = aircraftList[i].GetInboundAndOutboundTime();
-                row.CreateCell(4).SetCellValue(Convert.ToString(inboundTime));    // 第五列的值
-                row.CreateCell(5).SetCellValue(Convert.ToString(outbounTime));    // 第六列的值
+                //每一行依次写入
+                for (int i = 0; i < aircraftList.Count; i++)
+                {
+                    row = sheet.CreateRow(i + 1);   // i+1:从第二行开始写入(第一行可同理写标题)，i从第一行写入
+                    row.CreateCell(0).SetCellValue(aircraftList[i].aircraft.Callsign);   // 第一列的值
+                    row.CreateCell(1).SetCellValue(aircraftList[i].aircraft.UID);        // 第二列的值
+                    row.CreateCell(2).SetCellValue(aircraftList[i].aircraft.AirportD);   // 第三列的值
+                    row.CreateCell(3).SetCellValue(aircraftList[i].aircraft.AirportA);   // 第四列的值
+                    (DateTime inboundTime, DateTime outbounTime) = aircraftList[i].GetInboundAndOutboundTime();
+                    row.CreateCell(4).SetCellValue(Convert.ToString(inboundTime));    // 第五列的值
+                    row.CreateCell(5).SetCellValue(Convert.ToString(outbounTime));    // 第六列的值
+                }
+                // 文件写入的位置
+                using (FileStream fs = File.OpenWrite(checkPoint.checkPointName + ".xls"))
+                {
+                    workbook.Write(fs); // 向打开的这个xls文件中写入数据  
+                    result = true;
+                }
+                if (!result)    return false;
             }
-            // 文件写入的位置
-            using (FileStream fs = File.OpenWrite(checkPoint.checkPointName + ".xls"))
-            {
-                workbook.Write(fs); // 向打开的这个xls文件中写入数据  
-                result = true;
-            }
-            return result;
+            return true;
         }
         /// <summary>
         /// 判断呼号内是否包含机场ICAO码

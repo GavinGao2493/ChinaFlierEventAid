@@ -160,11 +160,11 @@ namespace ConsoleVersion
         /// </summary>
         /// <param name="LAT">纬度</param>
         /// <param name="LNG">经度</param>
-        /// <param name="altLow">最低检测高度，单位为ft</param>
-        /// <param name="altHigh">最高检测高度，单位为ft</param>
         /// <param name="range">检测范围，单位为km</param>
+        /// <param name="altLow">最低检测高度，单位为ft，留空默认值为0</param>
+        /// <param name="altHigh">最高检测高度，单位为ft，留空默认值为14900</param>
         /// <returns></returns>
-        public List<Aircraft>? GetInGivenAreaAircraft(double LAT, double LNG, int altLow, int altHigh, int range)
+        public List<Aircraft>? GetInGivenAreaAircrafts(double LAT, double LNG, int range, int altLow = 0, int altHigh = 14900)
         {
             if (aircrafts == null)
                 return null;

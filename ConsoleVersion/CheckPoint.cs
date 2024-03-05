@@ -66,7 +66,7 @@ namespace ConsoleVersion
         /// 利用最新范围内的机组来更新机组列表
         /// </summary>
         /// <param name="aircrafts">制定范围内的机组列表</param>
-        public void UpdateCheckedAircraft(List<Aircraft>? aircrafts)
+        public void UpdateCheckedAircrafts(List<Aircraft>? aircrafts)
         {
             if (aircrafts == null) return;
             foreach (var aircraft in aircrafts)
