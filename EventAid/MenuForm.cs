@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using EventAid;
+
 namespace EventAidForm
 {
     public partial class MenuForm : Form
@@ -20,14 +22,14 @@ namespace EventAidForm
             InitializeComponent();
         }
 
-        private void label1_MouseEnter(object sender, EventArgs e)
+        private void labelAtcForm_MouseEnter(object sender, EventArgs e)
         {
             if (isLabelSelected[0]) return;
             labelAtcForm.ForeColor = Color.White;
             pictureBoxAtcForm.BackColor = Color.White;
         }
 
-        private void label1_MouseLeave(object sender, EventArgs e)
+        private void labelAtcForm_MouseLeave(object sender, EventArgs e)
         {
             if (isLabelSelected[0]) return;
             labelAtcForm.ForeColor = Color.Gray;

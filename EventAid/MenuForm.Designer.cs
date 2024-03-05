@@ -46,15 +46,15 @@
             labelAtcForm.TabIndex = 1;
             labelAtcForm.Text = "ATC Online";
             labelAtcForm.Click += labelAtcForm_Click;
-            labelAtcForm.MouseEnter += label1_MouseEnter;
-            labelAtcForm.MouseLeave += label1_MouseLeave;
+            labelAtcForm.MouseEnter += labelAtcForm_MouseEnter;
+            labelAtcForm.MouseLeave += labelAtcForm_MouseLeave;
             // 
             // labelAircraft
             // 
             labelAircraft.ForeColor = Color.Gray;
             labelAircraft.Location = new Point(12, 88);
             labelAircraft.Name = "labelAircraft";
-            labelAircraft.Size = new Size(116, 20);
+            labelAircraft.Size = new Size(172, 20);
             labelAircraft.TabIndex = 2;
             labelAircraft.Text = "Aircraft Detect";
             labelAircraft.Click += labelAircraft_Click;
