@@ -34,10 +34,12 @@
             // 
             AutoScaleDimensions = new SizeF(9F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(782, 503);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             IsMdiContainer = true;
             Name = "MainForm";
-            Text = "Form1";
+            Text = "中国飞行者联盟活动管理部辅助软件 V1.0";
+            Load += MainForm_Load;
             ResumeLayout(false);
         }
 

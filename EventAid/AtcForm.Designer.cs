@@ -34,8 +34,10 @@
             // 
             AutoScaleDimensions = new SizeF(9F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(270, 450);
+            BackColor = SystemColors.ControlLight;
+            ClientSize = new Size(600, 550);
             ControlBox = false;
+            ForeColor = SystemColors.ControlText;
             FormBorderStyle = FormBorderStyle.None;
             Name = "AtcForm";
             ShowIcon = false;
