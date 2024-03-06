@@ -17,6 +17,8 @@ namespace EventAidForm
         // 记录label是否被选中
         bool[] isLabelSelected = new bool[2];
 
+        AtcForm atcForm = new AtcForm();
+
         public MenuForm()
         {
             InitializeComponent();
@@ -47,8 +49,8 @@ namespace EventAidForm
             isLabelSelected = new bool[2];
             isLabelSelected[0] = true;
             pictureBoxAtcForm.BackColor = Color.Red;
-
-            AtcForm atcForm = new AtcForm();
+            
+            // 此处要判断一下窗体是否已经创建
             atcForm.MdiParent = this.MdiParent;
             atcForm.Dock = DockStyle.Right;
             atcForm.Show();
