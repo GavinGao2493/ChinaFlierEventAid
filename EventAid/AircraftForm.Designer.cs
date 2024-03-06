@@ -42,7 +42,7 @@
             textBoxLowAlt = new TextBox();
             textBoxHighAlt = new TextBox();
             labelRange = new Label();
-            textBox1 = new TextBox();
+            textBoxRange = new TextBox();
             buttonStart = new Button();
             buttonEnd = new Button();
             buttonAddOrFix = new Button();
@@ -68,6 +68,8 @@
             listBox1.Name = "listBox1";
             listBox1.Size = new Size(128, 264);
             listBox1.TabIndex = 1;
+            listBox1.SelectedIndexChanged += listBox1_SelectedIndexChanged;
+            listBox1.MouseDoubleClick += listBox1_MouseDoubleClick;
             // 
             // labelName
             // 
@@ -109,6 +111,7 @@
             textBoxLat.Name = "textBoxLat";
             textBoxLat.Size = new Size(125, 27);
             textBoxLat.TabIndex = 6;
+            textBoxLat.KeyPress += textBoxLat_KeyPress;
             // 
             // textBoxLon
             // 
@@ -116,6 +119,7 @@
             textBoxLon.Name = "textBoxLon";
             textBoxLon.Size = new Size(125, 27);
             textBoxLon.TabIndex = 7;
+            textBoxLon.KeyPress += textBoxLon_KeyPress;
             // 
             // labelLowAlt
             // 
@@ -138,16 +142,20 @@
             // textBoxLowAlt
             // 
             textBoxLowAlt.Location = new Point(341, 190);
+            textBoxLowAlt.MaxLength = 5;
             textBoxLowAlt.Name = "textBoxLowAlt";
             textBoxLowAlt.Size = new Size(125, 27);
             textBoxLowAlt.TabIndex = 10;
+            textBoxLowAlt.KeyPress += textBoxLowAlt_KeyPress;
             // 
             // textBoxHighAlt
             // 
             textBoxHighAlt.Location = new Point(341, 235);
+            textBoxHighAlt.MaxLength = 5;
             textBoxHighAlt.Name = "textBoxHighAlt";
             textBoxHighAlt.Size = new Size(125, 27);
             textBoxHighAlt.TabIndex = 11;
+            textBoxHighAlt.KeyPress += textBoxHighAlt_KeyPress;
             // 
             // labelRange
             // 
@@ -158,12 +166,14 @@
             labelRange.TabIndex = 12;
             labelRange.Text = "水平范围";
             // 
-            // textBox1
+            // textBoxRange
             // 
-            textBox1.Location = new Point(341, 280);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(125, 27);
-            textBox1.TabIndex = 13;
+            textBoxRange.Location = new Point(341, 280);
+            textBoxRange.MaxLength = 4;
+            textBoxRange.Name = "textBoxRange";
+            textBoxRange.Size = new Size(125, 27);
+            textBoxRange.TabIndex = 13;
+            textBoxRange.KeyPress += textBoxRange_KeyPress;
             // 
             // buttonStart
             // 
@@ -176,6 +186,7 @@
             // 
             // buttonEnd
             // 
+            buttonEnd.Enabled = false;
             buttonEnd.Location = new Point(325, 443);
             buttonEnd.Name = "buttonEnd";
             buttonEnd.Size = new Size(127, 41);
@@ -191,6 +202,7 @@
             buttonAddOrFix.TabIndex = 16;
             buttonAddOrFix.Text = "添加/修改";
             buttonAddOrFix.UseVisualStyleBackColor = true;
+            buttonAddOrFix.Click += buttonAddOrFix_Click;
             // 
             // timer1
             // 
@@ -212,7 +224,7 @@
             labelAltDes2.Name = "labelAltDes2";
             labelAltDes2.Size = new Size(129, 20);
             labelAltDes2.TabIndex = 18;
-            labelAltDes2.Text = "留空默认为14900";
+            labelAltDes2.Text = "留空默认为48900";
             // 
             // labelManual
             // 
@@ -221,7 +233,7 @@
             labelManual.Name = "labelManual";
             labelManual.Size = new Size(359, 100);
             labelManual.TabIndex = 19;
-            labelManual.Text = "说明：\r\n1、检查点名称可自定义，如CheckPoint1、ZBAA等\r\n2、经纬度统一以度为单位，如30.06666\r\n3、最低/最高高度单位为英尺\r\n4、水平范围单位为千米";
+            labelManual.Text = "说明：\r\n1、检查点名称可自定义，如CheckPoint1、ZBAA等\r\n2、双击列表项可删除选中的检查点\r\n3、经纬度统一以度为单位，如30.06666\r\n4、最低/最高高度单位为英尺、水平范围单位为千米\r\n";
             // 
             // AircraftForm
             // 
@@ -235,7 +247,7 @@
             Controls.Add(buttonAddOrFix);
             Controls.Add(buttonEnd);
             Controls.Add(buttonStart);
-            Controls.Add(textBox1);
+            Controls.Add(textBoxRange);
             Controls.Add(labelRange);
             Controls.Add(textBoxHighAlt);
             Controls.Add(textBoxLowAlt);
@@ -272,7 +284,7 @@
         private TextBox textBoxLowAlt;
         private TextBox textBoxHighAlt;
         private Label labelRange;
-        private TextBox textBox1;
+        private TextBox textBoxRange;
         private Button buttonStart;
         private Button buttonEnd;
         private Button buttonAddOrFix;

@@ -57,9 +57,24 @@ namespace ConsoleVersion
     public class CheckPoint
     {
         public string checkPointName;
-        public CheckPoint(string checkPointName)
+        public double LAT, LNG;
+        public int range, lowAlt, highAlt;
+        /// <summary>
+        /// 初始化CheckPoint
+        /// </summary>
+        /// <param name="checkPointName"></param>
+        /// <param name="LAT"></param>
+        /// <param name="LNG"></param>
+        /// <param name="range"></param>
+        /// <param name="lowAlt"></param>
+        /// <param name="highAlt"></param>
+        public CheckPoint(string checkPointName, double LAT, double LNG, int range, int lowAlt = 0, int highAlt = 14900)
         {
             this.checkPointName = checkPointName;
+            this.LAT = LAT;
+            this.range = range;
+            this.lowAlt = lowAlt;
+            this.highAlt = highAlt;
         }
         List<CheckRecords> checkedAircraft = new List<CheckRecords>();
         /// <summary>

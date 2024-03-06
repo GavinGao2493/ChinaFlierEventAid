@@ -30,7 +30,7 @@ namespace ConsoleVersion
 
                 List<Aircraft>? selectedAircrafts = aircraftList.GetInGivenAreaAircrafts(23.383, 113.302, 100, 0, 45100);
                 List<CheckPoint> checkPoints = new List<CheckPoint>();
-                checkPoints.Add(new CheckPoint("CheckPoint1"));
+                checkPoints.Add(new CheckPoint("CheckPoint1", 23.383, 113.302, 100, 0, 45100));
                 checkPoints[0].UpdateCheckedAircrafts(selectedAircrafts);
                 ExportToExcel.CheckPointsToExcel(checkPoints);
             }

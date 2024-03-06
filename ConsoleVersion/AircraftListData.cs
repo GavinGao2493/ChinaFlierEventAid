@@ -164,7 +164,7 @@ namespace ConsoleVersion
         /// <param name="altLow">最低检测高度，单位为ft，留空默认值为0</param>
         /// <param name="altHigh">最高检测高度，单位为ft，留空默认值为14900</param>
         /// <returns></returns>
-        public List<Aircraft>? GetInGivenAreaAircrafts(double LAT, double LNG, int range, int altLow = 0, int altHigh = 14900)
+        public List<Aircraft>? GetInGivenAreaAircrafts(double LAT, double LNG, int range, int altLow = 0, int altHigh = 48900)
         {
             if (aircrafts == null)
                 return null;
