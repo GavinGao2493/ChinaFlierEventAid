@@ -47,6 +47,11 @@ namespace EventAidForm
             isLabelSelected = new bool[2];
             isLabelSelected[0] = true;
             pictureBoxAtcForm.BackColor = Color.Red;
+
+            AtcForm atcForm = new AtcForm();
+            atcForm.MdiParent = this.MdiParent;
+            atcForm.Dock = DockStyle.Right;
+            atcForm.Show();
         }
 
         private void labelAircraft_MouseEnter(object sender, EventArgs e)
