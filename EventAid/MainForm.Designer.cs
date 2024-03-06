@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             SuspendLayout();
             // 
             // MainForm
@@ -36,9 +37,10 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(807, 503);
             FormBorderStyle = FormBorderStyle.FixedSingle;
+            Icon = (Icon)resources.GetObject("$this.Icon");
             IsMdiContainer = true;
             Name = "MainForm";
-            Text = "中国飞行者联盟活动管理部辅助软件 V1.0";
+            Text = "中国飞行者联盟活动管理中心辅助软件 V1.0";
             Load += MainForm_Load;
             ResumeLayout(false);
         }
