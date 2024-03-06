@@ -50,6 +50,7 @@
             labelAltDes1 = new Label();
             labelAltDes2 = new Label();
             labelManual = new Label();
+            folderBrowserDialog1 = new FolderBrowserDialog();
             SuspendLayout();
             // 
             // labelCheckPoint
@@ -183,6 +184,7 @@
             buttonStart.TabIndex = 14;
             buttonStart.Text = "开始检测";
             buttonStart.UseVisualStyleBackColor = true;
+            buttonStart.Click += buttonStart_Click;
             // 
             // buttonEnd
             // 
@@ -193,6 +195,7 @@
             buttonEnd.TabIndex = 15;
             buttonEnd.Text = "结束检测并导出";
             buttonEnd.UseVisualStyleBackColor = true;
+            buttonEnd.Click += buttonEnd_Click;
             // 
             // buttonAddOrFix
             // 
@@ -207,6 +210,7 @@
             // timer1
             // 
             timer1.Interval = 5000;
+            timer1.Tick += timer1_Tick;
             // 
             // labelAltDes1
             // 
@@ -234,6 +238,11 @@
             labelManual.Size = new Size(359, 100);
             labelManual.TabIndex = 19;
             labelManual.Text = "说明：\r\n1、检查点名称可自定义，如CheckPoint1、ZBAA等\r\n2、双击列表项可删除选中的检查点\r\n3、经纬度统一以度为单位，如30.06666\r\n4、最低/最高高度单位为英尺、水平范围单位为千米\r\n";
+            // 
+            // folderBrowserDialog1
+            // 
+            folderBrowserDialog1.Description = "请选择输出文件夹";
+            folderBrowserDialog1.InitialDirectory = "Desktop";
             // 
             // AircraftForm
             // 
@@ -292,5 +301,6 @@
         private Label labelAltDes1;
         private Label labelAltDes2;
         private Label labelManual;
+        private FolderBrowserDialog folderBrowserDialog1;
     }
 }

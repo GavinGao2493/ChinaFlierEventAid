@@ -59,6 +59,7 @@ namespace ConsoleVersion
         public string checkPointName;
         public double LAT, LNG;
         public int range, lowAlt, highAlt;
+        List<CheckRecords> checkedAircraft = new List<CheckRecords>();
         /// <summary>
         /// 初始化CheckPoint
         /// </summary>
@@ -68,15 +69,15 @@ namespace ConsoleVersion
         /// <param name="range"></param>
         /// <param name="lowAlt"></param>
         /// <param name="highAlt"></param>
-        public CheckPoint(string checkPointName, double LAT, double LNG, int range, int lowAlt = 0, int highAlt = 14900)
+        public CheckPoint(string checkPointName, double LAT, double LNG, int range, int lowAlt = 0, int highAlt = 48900)
         {
             this.checkPointName = checkPointName;
             this.LAT = LAT;
+            this.LNG = LNG;
             this.range = range;
             this.lowAlt = lowAlt;
             this.highAlt = highAlt;
         }
-        List<CheckRecords> checkedAircraft = new List<CheckRecords>();
         /// <summary>
         /// 利用最新范围内的机组来更新机组列表
         /// </summary>

@@ -232,7 +232,7 @@ namespace ConsoleVersion
         /// </summary>
         /// <param name="checkPoint"></param>
         /// <returns></returns>
-        public static bool CheckPointsToExcel(List<CheckPoint> checkPoints)
+        public static bool CheckPointsToExcel(List<CheckPoint> checkPoints, string outputPath = "Output")
         {
             if (checkPoints.Count ==  0)    return false;
 
@@ -263,7 +263,7 @@ namespace ConsoleVersion
                     row.CreateCell(5).SetCellValue(Convert.ToString(outbounTime));    // 第六列的值
                 }
                 // 文件写入的位置
-                using (FileStream fs = File.OpenWrite("Output\\" + checkPoint.checkPointName + ".xls"))
+                using (FileStream fs = File.OpenWrite(outputPath + "\\" + checkPoint.checkPointName + ".xls"))
                 {
                     workbook.Write(fs); // 向打开的这个xls文件中写入数据  
                     result = true;

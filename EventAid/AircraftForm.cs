@@ -75,7 +75,7 @@ namespace EventAidForm
                 else
                     highAlt = Convert.ToInt32(textBoxHighAlt.Text);
                 checkPoints.Add(new CheckPoint(textBoxName.Text, Convert.ToDouble(textBoxLat.Text),
-                    Convert.ToDouble(textBoxLon.Text), lowAlt, highAlt));
+                    Convert.ToDouble(textBoxLon.Text), Convert.ToInt32(textBoxRange.Text), lowAlt, highAlt));
                 listBox1.Items.Add(textBoxName.Text);
             }
         }
@@ -155,6 +155,49 @@ namespace EventAidForm
             textBoxLowAlt.Text = Convert.ToString(checkPoints[index].lowAlt);
             textBoxHighAlt.Text = Convert.ToString(checkPoints[index].highAlt);
             textBoxRange.Text = Convert.ToString(checkPoints[index].range);
+        }
+
+        private void buttonStart_Click(object sender, EventArgs e)
+        {
+            if (listBox1.Items.Count == 0)
+            {
+                MessageBox.Show("请设置至少一个检查点");
+                return;
+            }
+            timer1.Start();
+            buttonStart.Enabled = false;
+            buttonEnd.Enabled = true;
+            buttonStart.Text = "检测中...";
+            timer1_Tick(sender, EventArgs.Empty);
+        }
+
+        private async void timer1_Tick(object sender, EventArgs e)
+        {
+            string urlAircraftList = "https://map.chinaflier.com/airline_list";
+            string contentAircraftList = await ConsoleVersion.Program.GetWebContent(urlAircraftList);
+            AircraftList aircraftList = new AircraftList(contentAircraftList);
+            foreach (var checkPoint in checkPoints)
+            {
+                List<Aircraft>? selectedAircrafts = aircraftList.GetInGivenAreaAircrafts(checkPoint.LAT,
+                    checkPoint.LNG, checkPoint.range, checkPoint.lowAlt, checkPoint.highAlt);
+                checkPoint.UpdateCheckedAircrafts(selectedAircrafts);
+            }
+        }
+
+        private void buttonEnd_Click(object sender, EventArgs e)
+        {
+            DialogResult result = folderBrowserDialog1.ShowDialog();
+            if (result == DialogResult.Cancel)
+            {
+                MessageBox.Show("请选择输出文件夹！");
+                return;
+            }
+            timer1.Stop();
+            ExportToExcel.CheckPointsToExcel(checkPoints, folderBrowserDialog1.SelectedPath);
+            buttonStart.Enabled = true;
+            buttonEnd.Enabled = false;
+            buttonStart.Text = "开始检测";
+            MessageBox.Show("导出成功！");
         }
     }
 }
