@@ -101,6 +101,7 @@
             FormBorderStyle = FormBorderStyle.None;
             Name = "MenuForm";
             Text = "Form1";
+            Load += MenuForm_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBoxAtcForm).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBoxAircraft).EndInit();
             ResumeLayout(false);

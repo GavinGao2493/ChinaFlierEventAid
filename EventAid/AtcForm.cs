@@ -9,11 +9,13 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Text.RegularExpressions;
 using ConsoleVersion;
+using EventAid;
 
 namespace EventAidForm
 {
     public partial class AtcForm : Form
     {
+        string urlAtcList = "https://map.chinaflier.com/atc_list";
         static bool IsEnglish(string input)
         {
             // 使用正则表达式匹配字符串是否只包含英文字符
@@ -103,9 +105,32 @@ namespace EventAidForm
             }
         }
 
-        private void buttonExport_Click(object sender, EventArgs e)
+        private async void buttonExport_Click(object sender, EventArgs e)
         {
+            saveFileDialog1.FileName = "AtcList";
+            DialogResult result = saveFileDialog1.ShowDialog(this);
+            if (string.IsNullOrWhiteSpace(saveFileDialog1.FileName) || result == DialogResult.Cancel)
+            {
+                MessageBox.Show("请选择文件位置！");
+                return;
+            }
 
+            List<string> AirportDs = new List<string>();
+            foreach (var item in listBox1.Items)
+                if (!string.IsNullOrEmpty(item.ToString()))
+                    AirportDs.Add(item.ToString());
+
+            List<string> AirportAs = new List<string>();
+            foreach (var item in listBox2.Items)
+                if (!string.IsNullOrEmpty(item.ToString()))
+                    AirportAs.Add(item.ToString());
+
+            string contentAtcList = await ConsoleVersion.Program.GetWebContent(urlAtcList);
+            AtcList atcList = new AtcList(contentAtcList);
+
+            ExportToExcel.AtcListToExcel(atcList.GetAtcList(), AirportDs, AirportAs, saveFileDialog1.FileName);
+
+            MessageBox.Show("导出完成！");
         }
     }
 }

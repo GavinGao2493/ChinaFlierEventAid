@@ -6,7 +6,7 @@ using NPOI.HSSF.UserModel;
 using NPOI.SS.UserModel;
 namespace ConsoleVersion
 {
-    class Program
+    public class Program
     {
         static async Task Main(string[] args)
         {
@@ -39,7 +39,7 @@ namespace ConsoleVersion
                 Console.WriteLine($"发生错误: {ex.Message}");
             }
         }
-        static async Task<string> GetWebContent(string url)
+        public static async Task<string> GetWebContent(string url)
         {
             using (HttpClient httpClient = new HttpClient())
             {

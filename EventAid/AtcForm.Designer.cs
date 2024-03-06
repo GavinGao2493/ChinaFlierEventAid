@@ -41,6 +41,7 @@
             buttonArrIcao = new Button();
             listBox2 = new ListBox();
             buttonExport = new Button();
+            saveFileDialog1 = new SaveFileDialog();
             SuspendLayout();
             // 
             // labelDep
@@ -163,6 +164,12 @@
             buttonExport.UseVisualStyleBackColor = true;
             buttonExport.Click += buttonExport_Click;
             // 
+            // saveFileDialog1
+            // 
+            saveFileDialog1.DefaultExt = "xls";
+            saveFileDialog1.FileName = "AtcList";
+            saveFileDialog1.Filter = "Excel 97-2003 工作簿|*.xls";
+            // 
             // AtcForm
             // 
             AutoScaleDimensions = new SizeF(9F, 20F);
@@ -208,5 +215,6 @@
         private Button buttonArrIcao;
         private ListBox listBox2;
         private Button buttonExport;
+        private SaveFileDialog saveFileDialog1;
     }
 }

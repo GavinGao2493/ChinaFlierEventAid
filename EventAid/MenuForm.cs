@@ -28,7 +28,7 @@ namespace EventAidForm
             labelAtcForm.ForeColor = Color.White;
             isLabelSelected[0] = true;
             pictureBoxAtcForm.BackColor = Color.Red;
-            
+
             aircraftForm.MdiParent = mainForm;
             aircraftForm.Dock = DockStyle.Right;
             //aircraftForm.Show();
@@ -92,10 +92,15 @@ namespace EventAidForm
             }
             isLabelSelected = new bool[2];
             isLabelSelected[1] = true;
-            pictureBoxAircraft.BackColor= Color.Red;
+            pictureBoxAircraft.BackColor = Color.Red;
 
             atcForm.Hide();
             aircraftForm.Show();
+        }
+
+        private void MenuForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
