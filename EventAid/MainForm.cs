@@ -4,10 +4,11 @@ namespace EventAid
 {
     public partial class MainForm : Form
     {
-        MenuForm menuForm = new MenuForm();
+        MenuForm menuForm;
         public MainForm()
         {
             InitializeComponent();
+            menuForm = new MenuForm(this);
         }
 
         private void MainForm_Load(object sender, EventArgs e)

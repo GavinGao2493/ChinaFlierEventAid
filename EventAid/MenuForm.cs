@@ -18,10 +18,24 @@ namespace EventAidForm
         bool[] isLabelSelected = new bool[2];
 
         AtcForm atcForm = new AtcForm();
+        AircraftForm aircraftForm = new AircraftForm();
 
-        public MenuForm()
+        public MenuForm(MainForm mainForm)
         {
             InitializeComponent();
+
+            // 初始化窗口
+            labelAtcForm.ForeColor = Color.White;
+            isLabelSelected[0] = true;
+            pictureBoxAtcForm.BackColor = Color.Red;
+            
+            aircraftForm.MdiParent = mainForm;
+            aircraftForm.Dock = DockStyle.Right;
+            //aircraftForm.Show();
+
+            atcForm.MdiParent = mainForm;
+            atcForm.Dock = DockStyle.Right;
+            atcForm.Show();
         }
 
         private void labelAtcForm_MouseEnter(object sender, EventArgs e)
@@ -49,10 +63,8 @@ namespace EventAidForm
             isLabelSelected = new bool[2];
             isLabelSelected[0] = true;
             pictureBoxAtcForm.BackColor = Color.Red;
-            
-            // 此处要判断一下窗体是否已经创建
-            atcForm.MdiParent = this.MdiParent;
-            atcForm.Dock = DockStyle.Right;
+
+            aircraftForm.Hide();
             atcForm.Show();
         }
 
@@ -81,6 +93,9 @@ namespace EventAidForm
             isLabelSelected = new bool[2];
             isLabelSelected[1] = true;
             pictureBoxAircraft.BackColor= Color.Red;
+
+            atcForm.Hide();
+            aircraftForm.Show();
         }
     }
 }
