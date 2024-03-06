@@ -8,6 +8,12 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <ApplicationIcon>logo.ico</ApplicationIcon>
     <SignAssembly>False</SignAssembly>
+    <Version>1.0.0</Version>
+    <Authors>Gavin Gao</Authors>
+    <Company>Gavin Gao</Company>
+    <Product>中国飞行者联盟活动管理中心辅助软件 V1.0</Product>
+    <Title>中国飞行者联盟活动管理中心辅助软件 V1.0</Title>
+    <Description>中国飞行者联盟活动管理中心辅助软件 V1.0</Description>
   </PropertyGroup>
 
   <ItemGroup>
