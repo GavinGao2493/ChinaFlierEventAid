@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             labelCheckPoint = new Label();
             listBox1 = new ListBox();
             labelName = new Label();
@@ -40,17 +41,21 @@
             labelHighAlt = new Label();
             textBoxLowAlt = new TextBox();
             textBoxHighAlt = new TextBox();
-            label1 = new Label();
+            labelRange = new Label();
             textBox1 = new TextBox();
             buttonStart = new Button();
             buttonEnd = new Button();
-            buttonAdd = new Button();
+            buttonAddOrFix = new Button();
+            timer1 = new System.Windows.Forms.Timer(components);
+            labelAltDes1 = new Label();
+            labelAltDes2 = new Label();
+            labelManual = new Label();
             SuspendLayout();
             // 
             // labelCheckPoint
             // 
             labelCheckPoint.AutoSize = true;
-            labelCheckPoint.Location = new Point(73, 61);
+            labelCheckPoint.Location = new Point(102, 26);
             labelCheckPoint.Name = "labelCheckPoint";
             labelCheckPoint.Size = new Size(84, 20);
             labelCheckPoint.TabIndex = 0;
@@ -59,7 +64,7 @@
             // listBox1
             // 
             listBox1.FormattingEnabled = true;
-            listBox1.Location = new Point(51, 98);
+            listBox1.Location = new Point(80, 58);
             listBox1.Name = "listBox1";
             listBox1.Size = new Size(128, 264);
             listBox1.TabIndex = 1;
@@ -67,7 +72,7 @@
             // labelName
             // 
             labelName.AutoSize = true;
-            labelName.Location = new Point(260, 100);
+            labelName.Location = new Point(289, 60);
             labelName.Name = "labelName";
             labelName.Size = new Size(39, 20);
             labelName.TabIndex = 2;
@@ -75,7 +80,7 @@
             // 
             // textBoxName
             // 
-            textBoxName.Location = new Point(312, 95);
+            textBoxName.Location = new Point(341, 55);
             textBoxName.Name = "textBoxName";
             textBoxName.Size = new Size(125, 27);
             textBoxName.TabIndex = 3;
@@ -83,7 +88,7 @@
             // labelLat
             // 
             labelLat.AutoSize = true;
-            labelLat.Location = new Point(260, 145);
+            labelLat.Location = new Point(289, 105);
             labelLat.Name = "labelLat";
             labelLat.Size = new Size(39, 20);
             labelLat.TabIndex = 4;
@@ -92,7 +97,7 @@
             // labelLon
             // 
             labelLon.AutoSize = true;
-            labelLon.Location = new Point(260, 190);
+            labelLon.Location = new Point(289, 150);
             labelLon.Name = "labelLon";
             labelLon.Size = new Size(39, 20);
             labelLon.TabIndex = 5;
@@ -100,14 +105,14 @@
             // 
             // textBoxLat
             // 
-            textBoxLat.Location = new Point(312, 140);
+            textBoxLat.Location = new Point(341, 100);
             textBoxLat.Name = "textBoxLat";
             textBoxLat.Size = new Size(125, 27);
             textBoxLat.TabIndex = 6;
             // 
             // textBoxLon
             // 
-            textBoxLon.Location = new Point(312, 185);
+            textBoxLon.Location = new Point(341, 145);
             textBoxLon.Name = "textBoxLon";
             textBoxLon.Size = new Size(125, 27);
             textBoxLon.TabIndex = 7;
@@ -115,7 +120,7 @@
             // labelLowAlt
             // 
             labelLowAlt.AutoSize = true;
-            labelLowAlt.Location = new Point(230, 235);
+            labelLowAlt.Location = new Point(259, 195);
             labelLowAlt.Name = "labelLowAlt";
             labelLowAlt.Size = new Size(69, 20);
             labelLowAlt.TabIndex = 8;
@@ -124,7 +129,7 @@
             // labelHighAlt
             // 
             labelHighAlt.AutoSize = true;
-            labelHighAlt.Location = new Point(230, 280);
+            labelHighAlt.Location = new Point(259, 240);
             labelHighAlt.Name = "labelHighAlt";
             labelHighAlt.Size = new Size(69, 20);
             labelHighAlt.TabIndex = 9;
@@ -132,60 +137,91 @@
             // 
             // textBoxLowAlt
             // 
-            textBoxLowAlt.Location = new Point(312, 230);
+            textBoxLowAlt.Location = new Point(341, 190);
             textBoxLowAlt.Name = "textBoxLowAlt";
             textBoxLowAlt.Size = new Size(125, 27);
             textBoxLowAlt.TabIndex = 10;
             // 
             // textBoxHighAlt
             // 
-            textBoxHighAlt.Location = new Point(312, 275);
+            textBoxHighAlt.Location = new Point(341, 235);
             textBoxHighAlt.Name = "textBoxHighAlt";
             textBoxHighAlt.Size = new Size(125, 27);
             textBoxHighAlt.TabIndex = 11;
             // 
-            // label1
+            // labelRange
             // 
-            label1.AutoSize = true;
-            label1.Location = new Point(230, 325);
-            label1.Name = "label1";
-            label1.Size = new Size(69, 20);
-            label1.TabIndex = 12;
-            label1.Text = "最高高度";
+            labelRange.AutoSize = true;
+            labelRange.Location = new Point(259, 285);
+            labelRange.Name = "labelRange";
+            labelRange.Size = new Size(69, 20);
+            labelRange.TabIndex = 12;
+            labelRange.Text = "水平范围";
             // 
             // textBox1
             // 
-            textBox1.Location = new Point(312, 320);
+            textBox1.Location = new Point(341, 280);
             textBox1.Name = "textBox1";
             textBox1.Size = new Size(125, 27);
             textBox1.TabIndex = 13;
             // 
             // buttonStart
             // 
-            buttonStart.Location = new Point(51, 421);
+            buttonStart.Location = new Point(146, 443);
             buttonStart.Name = "buttonStart";
-            buttonStart.Size = new Size(106, 56);
+            buttonStart.Size = new Size(131, 41);
             buttonStart.TabIndex = 14;
             buttonStart.Text = "开始检测";
             buttonStart.UseVisualStyleBackColor = true;
             // 
             // buttonEnd
             // 
-            buttonEnd.Location = new Point(230, 421);
+            buttonEnd.Location = new Point(325, 443);
             buttonEnd.Name = "buttonEnd";
-            buttonEnd.Size = new Size(102, 56);
+            buttonEnd.Size = new Size(127, 41);
             buttonEnd.TabIndex = 15;
             buttonEnd.Text = "结束检测并导出";
             buttonEnd.UseVisualStyleBackColor = true;
             // 
-            // buttonAdd
+            // buttonAddOrFix
             // 
-            buttonAdd.Location = new Point(465, 95);
-            buttonAdd.Name = "buttonAdd";
-            buttonAdd.Size = new Size(39, 70);
-            buttonAdd.TabIndex = 16;
-            buttonAdd.Text = "添加";
-            buttonAdd.UseVisualStyleBackColor = true;
+            buttonAddOrFix.Location = new Point(487, 53);
+            buttonAddOrFix.Name = "buttonAddOrFix";
+            buttonAddOrFix.Size = new Size(30, 117);
+            buttonAddOrFix.TabIndex = 16;
+            buttonAddOrFix.Text = "添加/修改";
+            buttonAddOrFix.UseVisualStyleBackColor = true;
+            // 
+            // timer1
+            // 
+            timer1.Interval = 5000;
+            // 
+            // labelAltDes1
+            // 
+            labelAltDes1.AutoSize = true;
+            labelAltDes1.Location = new Point(472, 195);
+            labelAltDes1.Name = "labelAltDes1";
+            labelAltDes1.Size = new Size(93, 20);
+            labelAltDes1.TabIndex = 17;
+            labelAltDes1.Text = "留空默认为0";
+            // 
+            // labelAltDes2
+            // 
+            labelAltDes2.AutoSize = true;
+            labelAltDes2.Location = new Point(472, 240);
+            labelAltDes2.Name = "labelAltDes2";
+            labelAltDes2.Size = new Size(129, 20);
+            labelAltDes2.TabIndex = 18;
+            labelAltDes2.Text = "留空默认为14900";
+            // 
+            // labelManual
+            // 
+            labelManual.AutoSize = true;
+            labelManual.Location = new Point(80, 328);
+            labelManual.Name = "labelManual";
+            labelManual.Size = new Size(359, 100);
+            labelManual.TabIndex = 19;
+            labelManual.Text = "说明：\r\n1、检查点名称可自定义，如CheckPoint1、ZBAA等\r\n2、经纬度统一以度为单位，如30.06666\r\n3、最低/最高高度单位为英尺\r\n4、水平范围单位为千米";
             // 
             // AircraftForm
             // 
@@ -193,11 +229,14 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ControlLight;
             ClientSize = new Size(600, 550);
-            Controls.Add(buttonAdd);
+            Controls.Add(labelManual);
+            Controls.Add(labelAltDes2);
+            Controls.Add(labelAltDes1);
+            Controls.Add(buttonAddOrFix);
             Controls.Add(buttonEnd);
             Controls.Add(buttonStart);
             Controls.Add(textBox1);
-            Controls.Add(label1);
+            Controls.Add(labelRange);
             Controls.Add(textBoxHighAlt);
             Controls.Add(textBoxLowAlt);
             Controls.Add(labelHighAlt);
@@ -213,6 +252,7 @@
             FormBorderStyle = FormBorderStyle.None;
             Name = "AircraftForm";
             Text = "AircraftForm";
+            Load += AircraftForm_Load;
             ResumeLayout(false);
             PerformLayout();
         }
@@ -231,10 +271,14 @@
         private Label labelHighAlt;
         private TextBox textBoxLowAlt;
         private TextBox textBoxHighAlt;
-        private Label label1;
+        private Label labelRange;
         private TextBox textBox1;
         private Button buttonStart;
         private Button buttonEnd;
-        private Button buttonAdd;
+        private Button buttonAddOrFix;
+        private System.Windows.Forms.Timer timer1;
+        private Label labelAltDes1;
+        private Label labelAltDes2;
+        private Label labelManual;
     }
 }

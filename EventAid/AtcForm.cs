@@ -31,6 +31,7 @@ namespace EventAidForm
         private void AtcForm_Load(object sender, EventArgs e)
         {
             listBox1.Items.Clear();
+            listBox2.Items.Clear();
         }
 
         private void buttonDepIcao_Click(object sender, EventArgs e)

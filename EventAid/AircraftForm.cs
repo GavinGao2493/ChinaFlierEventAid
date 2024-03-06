@@ -16,5 +16,10 @@ namespace EventAidForm
         {
             InitializeComponent();
         }
+
+        private void AircraftForm_Load(object sender, EventArgs e)
+        {
+            listBox1.Items.Clear();
+        }
     }
 }
