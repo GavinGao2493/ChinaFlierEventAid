@@ -34,7 +34,7 @@ namespace ConsoleVersion
                 row.CreateCell(1).SetCellValue(atcList[i].UID);//第二列的值
             }
             //文件写入的位置
-            using (FileStream fs = File.OpenWrite(@"AtcList.xls"))
+            using (FileStream fs = File.OpenWrite(@"Output\AllAtcList.xls"))
             {
                 workbook.Write(fs);//向打开的这个xls文件中写入数据  
                 result = true;
@@ -183,7 +183,7 @@ namespace ConsoleVersion
                 }
             }
             //文件写入的位置
-            using (FileStream fs = File.OpenWrite(@"AtcList.xls"))
+            using (FileStream fs = File.OpenWrite(@"Output\AtcList.xls"))
             {
                 workbook.Write(fs);//向打开的这个xls文件中写入数据  
                 result = true;
@@ -220,7 +220,7 @@ namespace ConsoleVersion
                 row.CreateCell(4).SetCellValue(aircraftList[i].Model);      // 第五列的值
             }
             // 文件写入的位置
-            using (FileStream fs = File.OpenWrite(@"AircraftList.xls"))
+            using (FileStream fs = File.OpenWrite(@"Output\AircraftList.xls"))
             {
                 workbook.Write(fs); // 向打开的这个xls文件中写入数据  
                 result = true;
@@ -263,7 +263,7 @@ namespace ConsoleVersion
                     row.CreateCell(5).SetCellValue(Convert.ToString(outbounTime));    // 第六列的值
                 }
                 // 文件写入的位置
-                using (FileStream fs = File.OpenWrite(checkPoint.checkPointName + ".xls"))
+                using (FileStream fs = File.OpenWrite("Output\\" + checkPoint.checkPointName + ".xls"))
                 {
                     workbook.Write(fs); // 向打开的这个xls文件中写入数据  
                     result = true;
