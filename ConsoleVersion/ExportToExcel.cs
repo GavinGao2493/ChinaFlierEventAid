@@ -9,7 +9,7 @@ using NPOI.SS.UserModel;
 using NPOI.SS.Util;
 namespace ConsoleVersion
 {
-    internal class ExportToExcel
+    public class ExportToExcel
     {
         /// <summary>
         /// 导出所有在线管制员列表

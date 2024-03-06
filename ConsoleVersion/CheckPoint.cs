@@ -9,7 +9,7 @@ namespace ConsoleVersion
     /// <summary>
     /// 存储一个机组的一条记录
     /// </summary>
-    class CheckRecords
+    public class CheckRecords
     {
         public Aircraft aircraft;
         /// <summary>
@@ -54,7 +54,7 @@ namespace ConsoleVersion
     /// <summary>
     /// 存储一个CheckPoint的相关机组数据
     /// </summary>
-    class CheckPoint
+    public class CheckPoint
     {
         public string checkPointName;
         public CheckPoint(string checkPointName)

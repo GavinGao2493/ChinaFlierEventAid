@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Text.RegularExpressions;
+using ConsoleVersion;
 
 namespace EventAidForm
 {
@@ -100,6 +101,11 @@ namespace EventAidForm
                 // 删除双击的项
                 listBox2.Items.RemoveAt(index);
             }
+        }
+
+        private void buttonExport_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

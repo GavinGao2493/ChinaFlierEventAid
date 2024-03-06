@@ -161,6 +161,7 @@
             buttonExport.TabIndex = 12;
             buttonExport.Text = "导出当前时刻的管制列表";
             buttonExport.UseVisualStyleBackColor = true;
+            buttonExport.Click += buttonExport_Click;
             // 
             // AtcForm
             // 

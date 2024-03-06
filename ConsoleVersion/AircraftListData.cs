@@ -6,7 +6,7 @@ namespace ConsoleVersion
     /// <summary>
     /// 存储单个机组信息
     /// </summary>
-    class Aircraft()
+    public class Aircraft()
     {
         /// <summary>
         /// 到达机场ICAO码
@@ -144,7 +144,7 @@ namespace ConsoleVersion
     /// <summary>
     /// 存储全部机组信息（从airline_list中读取）
     /// </summary>
-    class AircraftList
+    public class AircraftList
     {
         List<Aircraft>? aircrafts;
         public AircraftList(string jsonString)

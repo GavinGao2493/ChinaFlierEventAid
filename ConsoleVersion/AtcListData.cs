@@ -6,7 +6,7 @@ namespace ConsoleVersion
     /// <summary>
     /// 存储边界上的每一个点
     /// </summary>
-    class BorderPoint
+    public class BorderPoint
     {
         /// <summary>
         /// 纬度
@@ -27,7 +27,7 @@ namespace ConsoleVersion
     /// <summary>
     /// 存储一个管制员信息
     /// </summary>
-    class AtcInfo
+    public class AtcInfo
     {
         /// <summary>
         /// 意义不明
@@ -66,7 +66,7 @@ namespace ConsoleVersion
     /// <summary>
     /// 存储所有在线管制员信息
     /// </summary>
-    class AtcList
+    public class AtcList
     {
         List<AtcInfo>? atcList = new List<AtcInfo>();
         public AtcList(string jsonString)
