@@ -8,12 +8,17 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <ApplicationIcon>logo.ico</ApplicationIcon>
     <SignAssembly>False</SignAssembly>
-    <Version>1.0.0</Version>
+    <Version>1.0.1</Version>
     <Authors>Gavin Gao</Authors>
     <Company>Gavin Gao</Company>
     <Product>中国飞行者联盟活动管理中心辅助软件 V1.0</Product>
     <Title>中国飞行者联盟活动管理中心辅助软件 V1.0</Title>
     <Description>中国飞行者联盟活动管理中心辅助软件 V1.0</Description>
+    <PackageId>中国飞行者联盟活动管理中心辅助软件 V1.0</PackageId>
+    <Copyright>Copyright © Gavin Gao 2024</Copyright>
+    <PackageIcon>logo.jpg</PackageIcon>
+    <AssemblyVersion>1.0.1</AssemblyVersion>
+    <FileVersion>1.0.1</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -22,6 +27,13 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ConsoleVersion\ConsoleVersion.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="logo.jpg">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>

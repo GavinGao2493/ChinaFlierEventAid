@@ -108,6 +108,24 @@ namespace EventAidForm
 
         private async void buttonExport_Click(object sender, EventArgs e)
         {
+            if (listBox1.Items.Count == 0 && listBox2.Items.Count == 0) 
+            {
+                MessageBox.Show("请输入起飞与落地机场ICAO代码");
+                return;
+            }
+
+            if (listBox1.Items.Count == 0)
+            {
+                MessageBox.Show("请输入起飞机场ICAO代码");
+                return;
+            }
+
+            if (listBox2.Items.Count == 0)
+            {
+                MessageBox.Show("请输入落地机场ICAO代码");
+                return;
+            }
+
             saveFileDialog1.FileName = "AtcList";
             DialogResult result = saveFileDialog1.ShowDialog(this);
             if (string.IsNullOrWhiteSpace(saveFileDialog1.FileName) || result == DialogResult.Cancel)
