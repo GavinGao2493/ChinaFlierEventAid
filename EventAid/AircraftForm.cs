@@ -166,6 +166,13 @@ namespace EventAidForm
             }
             timer1.Start();
             buttonStart.Enabled = false;
+            listBox1.Enabled = false;
+            textBoxName.Enabled = false;
+            textBoxLat.Enabled = false;
+            textBoxLon.Enabled = false;
+            textBoxLowAlt.Enabled = false;
+            textBoxHighAlt.Enabled = false;
+            textBoxRange.Enabled = false;
             buttonEnd.Enabled = true;
             buttonStart.Text = "检测中...";
             timer1_Tick(sender, EventArgs.Empty);
@@ -195,6 +202,13 @@ namespace EventAidForm
             timer1.Stop();
             ExportToExcel.CheckPointsToExcel(checkPoints, folderBrowserDialog1.SelectedPath);
             buttonStart.Enabled = true;
+            listBox1.Enabled = true;
+            textBoxName.Enabled = true;
+            textBoxLat.Enabled = true;
+            textBoxLon.Enabled = true;
+            textBoxLowAlt.Enabled = true;
+            textBoxHighAlt.Enabled = true;
+            textBoxRange.Enabled = true;
             buttonEnd.Enabled = false;
             buttonStart.Text = "开始检测";
             MessageBox.Show("导出成功！");
