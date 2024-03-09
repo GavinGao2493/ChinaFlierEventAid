@@ -14,6 +14,7 @@ namespace EventAidForm
     public partial class AircraftForm : Form
     {
         List<CheckPoint> checkPoints = new List<CheckPoint>();
+        string logFileName = "";
         public AircraftForm()
         {
             InitializeComponent();
@@ -164,8 +165,13 @@ namespace EventAidForm
                 MessageBox.Show("请设置至少一个检查点");
                 return;
             }
+            DialogResult result = MessageBox.Show("此操作将会覆盖原有记录，是否继续", "确认", MessageBoxButtons.YesNo);
+            if (result == DialogResult.No)
+                return;
+
             timer1.Start();
             buttonStart.Enabled = false;
+            buttonExport.Enabled = false;
             listBox1.Enabled = false;
             textBoxName.Enabled = false;
             textBoxLat.Enabled = false;
@@ -175,6 +181,8 @@ namespace EventAidForm
             textBoxRange.Enabled = false;
             buttonEnd.Enabled = true;
             buttonStart.Text = "检测中...";
+            DateTimeOffset currentTime = DateTimeOffset.Now;
+            logFileName = currentTime.ToUnixTimeSeconds().ToString();
             timer1_Tick(sender, EventArgs.Empty);
         }
 
@@ -182,6 +190,8 @@ namespace EventAidForm
         {
             string urlAircraftList = "https://map.chinaflier.com/airline_list";
             string contentAircraftList = await ConsoleVersion.Program.GetWebContent(urlAircraftList);
+            WriteLog(@".\logs\" + logFileName + ".log"
+                , DateTime.Now.ToLongTimeString() + "\n" + contentAircraftList);
             AircraftList aircraftList = new AircraftList(contentAircraftList);
             foreach (var checkPoint in checkPoints)
             {
@@ -193,16 +203,13 @@ namespace EventAidForm
 
         private void buttonEnd_Click(object sender, EventArgs e)
         {
-            folderBrowserDialog1.SelectedPath = "";
-            DialogResult result = folderBrowserDialog1.ShowDialog();
-            if (result == DialogResult.Cancel)
-            {
-                MessageBox.Show("请选择输出文件夹！");
+            DialogResult result = MessageBox.Show("确定要结束吗", "确认", MessageBoxButtons.YesNo);
+            if (result == DialogResult.No)
                 return;
-            }
             timer1.Stop();
-            ExportToExcel.CheckPointsToExcel(checkPoints, folderBrowserDialog1.SelectedPath);
             buttonStart.Enabled = true;
+            buttonEnd.Enabled = true;
+            buttonExport.Enabled = true;
             listBox1.Enabled = true;
             textBoxName.Enabled = true;
             textBoxLat.Enabled = true;
@@ -212,6 +219,37 @@ namespace EventAidForm
             textBoxRange.Enabled = true;
             buttonEnd.Enabled = false;
             buttonStart.Text = "开始检测";
+        }
+        private static void WriteLog(string filePath, string message)
+        {
+            if (!File.Exists(filePath))
+            {
+                using (StreamWriter sw = File.CreateText(filePath))
+                {
+                    // 在新文件中写入Log信息
+                    sw.WriteLine(message);
+                }
+            }
+            else
+            {
+                // 使用StreamWriter将信息追加到现有文件
+                using (StreamWriter sw = File.AppendText(filePath))
+                {
+                    sw.WriteLine(message);
+                }
+            }
+        }
+
+        private void buttonExport_Click(object sender, EventArgs e)
+        {
+            folderBrowserDialog1.SelectedPath = "";
+            DialogResult result = folderBrowserDialog1.ShowDialog();
+            if (result == DialogResult.Cancel)
+            {
+                MessageBox.Show("请选择输出文件夹！");
+                return;
+            }
+            ExportToExcel.CheckPointsToExcel(checkPoints, folderBrowserDialog1.SelectedPath);
             MessageBox.Show("导出成功！");
         }
     }

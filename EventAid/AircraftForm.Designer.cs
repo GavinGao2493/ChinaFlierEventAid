@@ -51,6 +51,7 @@
             labelAltDes2 = new Label();
             labelManual = new Label();
             folderBrowserDialog1 = new FolderBrowserDialog();
+            buttonExport = new Button();
             SuspendLayout();
             // 
             // labelCheckPoint
@@ -178,7 +179,7 @@
             // 
             // buttonStart
             // 
-            buttonStart.Location = new Point(146, 443);
+            buttonStart.Location = new Point(80, 442);
             buttonStart.Name = "buttonStart";
             buttonStart.Size = new Size(131, 41);
             buttonStart.TabIndex = 14;
@@ -189,11 +190,11 @@
             // buttonEnd
             // 
             buttonEnd.Enabled = false;
-            buttonEnd.Location = new Point(325, 443);
+            buttonEnd.Location = new Point(245, 442);
             buttonEnd.Name = "buttonEnd";
             buttonEnd.Size = new Size(127, 41);
             buttonEnd.TabIndex = 15;
-            buttonEnd.Text = "结束检测并导出";
+            buttonEnd.Text = "结束检测";
             buttonEnd.UseVisualStyleBackColor = true;
             buttonEnd.Click += buttonEnd_Click;
             // 
@@ -244,12 +245,24 @@
             folderBrowserDialog1.Description = "请选择输出文件夹";
             folderBrowserDialog1.InitialDirectory = "Desktop";
             // 
+            // buttonExport
+            // 
+            buttonExport.Enabled = false;
+            buttonExport.Location = new Point(411, 442);
+            buttonExport.Name = "buttonExport";
+            buttonExport.Size = new Size(127, 41);
+            buttonExport.TabIndex = 20;
+            buttonExport.Text = "导出数据";
+            buttonExport.UseVisualStyleBackColor = true;
+            buttonExport.Click += buttonExport_Click;
+            // 
             // AircraftForm
             // 
             AutoScaleDimensions = new SizeF(9F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ControlLight;
             ClientSize = new Size(600, 550);
+            Controls.Add(buttonExport);
             Controls.Add(labelManual);
             Controls.Add(labelAltDes2);
             Controls.Add(labelAltDes1);
@@ -302,5 +315,6 @@
         private Label labelAltDes2;
         private Label labelManual;
         private FolderBrowserDialog folderBrowserDialog1;
+        private Button buttonExport;
     }
 }
