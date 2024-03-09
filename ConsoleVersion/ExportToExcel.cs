@@ -241,7 +241,7 @@ namespace ConsoleVersion
                 bool result = false;
                 List<CheckRecords> aircraftList = checkPoint.GetCheckPoinrRecords();
                 IWorkbook workbook = new HSSFWorkbook();
-                ISheet sheet = workbook.CreateSheet("Sheet1");  // 创建一个名称为Sheet1的表;
+                ISheet sheet = workbook.CreateSheet(checkPoint.checkPointName);  // 创建一个名称为checkPoint的表;
                 IRow row = sheet.CreateRow(0);  // 第一行写标题
                 row.CreateCell(0).SetCellValue("机组呼号"); // 第一列标题
                 row.CreateCell(1).SetCellValue("用户编号"); // 第二列标题

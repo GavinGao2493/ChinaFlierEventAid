@@ -8,21 +8,26 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <ApplicationIcon>logo.ico</ApplicationIcon>
     <SignAssembly>False</SignAssembly>
-    <Version>1.0.1</Version>
+    <Version>1.1.0</Version>
     <Authors>Gavin Gao</Authors>
     <Company>Gavin Gao</Company>
-    <Product>中国飞行者联盟活动管理中心辅助软件 V1.0</Product>
-    <Title>中国飞行者联盟活动管理中心辅助软件 V1.0</Title>
-    <Description>中国飞行者联盟活动管理中心辅助软件 V1.0</Description>
-    <PackageId>中国飞行者联盟活动管理中心辅助软件 V1.0</PackageId>
+    <Product>中国飞行者联盟活动管理中心辅助软件 V1.1</Product>
+    <Title>中国飞行者联盟活动管理中心辅助软件 V1.1</Title>
+    <Description>中国飞行者联盟活动管理中心辅助软件 V1.1</Description>
+    <PackageId>中国飞行者联盟活动管理中心辅助软件 V1.1</PackageId>
     <Copyright>Copyright © Gavin Gao 2024</Copyright>
     <PackageIcon>logo.jpg</PackageIcon>
-    <AssemblyVersion>1.0.1</AssemblyVersion>
-    <FileVersion>1.0.1</FileVersion>
+    <AssemblyVersion>1.1.0</AssemblyVersion>
+    <FileVersion>1.1.0</FileVersion>
+    <Platforms>AnyCPU;x64;x86</Platforms>
   </PropertyGroup>
 
   <ItemGroup>
     <Content Include="logo.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CefSharp.WinForms.NETCore" Version="121.3.130" />
   </ItemGroup>
 
   <ItemGroup>

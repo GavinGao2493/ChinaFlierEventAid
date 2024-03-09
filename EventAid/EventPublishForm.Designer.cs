@@ -1,14 +1,14 @@
-﻿namespace EventAid
+﻿namespace EventAidForm
 {
-    partial class MainForm
+    partial class EventPublishForm
     {
         /// <summary>
-        ///  Required designer variable.
+        /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
 
         /// <summary>
-        ///  Clean up any resources being used.
+        /// Clean up any resources being used.
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
@@ -23,26 +23,22 @@
         #region Windows Form Designer generated code
 
         /// <summary>
-        ///  Required method for Designer support - do not modify
-        ///  the contents of this method with the code editor.
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             SuspendLayout();
             // 
-            // MainForm
+            // EventPublish
             // 
             AutoScaleDimensions = new SizeF(9F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(807, 503);
-            FormBorderStyle = FormBorderStyle.FixedSingle;
-            Icon = (Icon)resources.GetObject("$this.Icon");
-            IsMdiContainer = true;
-            MaximizeBox = false;
-            Name = "MainForm";
-            Text = "中国飞行者联盟活动管理中心辅助软件 V1.1";
-            Load += MainForm_Load;
+            BackColor = SystemColors.ControlLight;
+            ClientSize = new Size(600, 550);
+            FormBorderStyle = FormBorderStyle.None;
+            Name = "EventPublish";
+            Text = "EventPublish";
             ResumeLayout(false);
         }
 

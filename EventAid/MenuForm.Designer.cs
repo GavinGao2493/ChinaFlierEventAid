@@ -33,8 +33,11 @@
             pictureBoxAtcForm = new PictureBox();
             pictureBoxAircraft = new PictureBox();
             labelCopyright = new Label();
+            labelEvent = new Label();
+            pictureBoxEvent = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)pictureBoxAtcForm).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBoxAircraft).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBoxEvent).BeginInit();
             SuspendLayout();
             // 
             // labelAtcForm
@@ -85,7 +88,27 @@
             labelCopyright.Name = "labelCopyright";
             labelCopyright.Size = new Size(107, 40);
             labelCopyright.TabIndex = 5;
-            labelCopyright.Text = "版本 V1.0\r\n作者 CFR2493";
+            labelCopyright.Text = "版本 V1.1\r\n作者 CFR2493";
+            // 
+            // labelEvent
+            // 
+            labelEvent.ForeColor = Color.Gray;
+            labelEvent.Location = new Point(12, 131);
+            labelEvent.Name = "labelEvent";
+            labelEvent.Size = new Size(172, 20);
+            labelEvent.TabIndex = 6;
+            labelEvent.Text = "Event Publish";
+            labelEvent.Click += labelEvent_Click;
+            labelEvent.MouseEnter += labelEvent_MouseEnter;
+            labelEvent.MouseLeave += labelEvent_MouseLeave;
+            // 
+            // pictureBoxEvent
+            // 
+            pictureBoxEvent.Location = new Point(190, 125);
+            pictureBoxEvent.Name = "pictureBoxEvent";
+            pictureBoxEvent.Size = new Size(10, 28);
+            pictureBoxEvent.TabIndex = 7;
+            pictureBoxEvent.TabStop = false;
             // 
             // MenuForm
             // 
@@ -93,6 +116,8 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(38, 50, 56);
             ClientSize = new Size(200, 550);
+            Controls.Add(pictureBoxEvent);
+            Controls.Add(labelEvent);
             Controls.Add(labelCopyright);
             Controls.Add(pictureBoxAircraft);
             Controls.Add(pictureBoxAtcForm);
@@ -101,9 +126,9 @@
             FormBorderStyle = FormBorderStyle.None;
             Name = "MenuForm";
             Text = "Form1";
-            Load += MenuForm_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBoxAtcForm).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBoxAircraft).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBoxEvent).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -114,5 +139,7 @@
         private PictureBox pictureBoxAtcForm;
         private PictureBox pictureBoxAircraft;
         private Label labelCopyright;
+        private Label labelEvent;
+        private PictureBox pictureBoxEvent;
     }
 }

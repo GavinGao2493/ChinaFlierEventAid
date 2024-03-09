@@ -193,6 +193,7 @@ namespace EventAidForm
 
         private void buttonEnd_Click(object sender, EventArgs e)
         {
+            folderBrowserDialog1.SelectedPath = "";
             DialogResult result = folderBrowserDialog1.ShowDialog();
             if (result == DialogResult.Cancel)
             {
