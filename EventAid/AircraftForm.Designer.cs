@@ -52,6 +52,8 @@
             labelManual = new Label();
             buttonExport = new Button();
             saveFileDialog1 = new SaveFileDialog();
+            buttonLog = new Button();
+            openFileDialogLog = new OpenFileDialog();
             SuspendLayout();
             // 
             // labelCheckPoint
@@ -257,12 +259,28 @@
             saveFileDialog1.FileName = "AircraftList";
             saveFileDialog1.Filter = "Excel 97-2003 工作簿|*.xls";
             // 
+            // buttonLog
+            // 
+            buttonLog.Location = new Point(445, 380);
+            buttonLog.Name = "buttonLog";
+            buttonLog.Size = new Size(93, 48);
+            buttonLog.TabIndex = 21;
+            buttonLog.Text = "从日志文件中导出";
+            buttonLog.UseVisualStyleBackColor = true;
+            buttonLog.Click += buttonLog_Click;
+            // 
+            // openFileDialogLog
+            // 
+            openFileDialogLog.FileName = "openFileDialog1";
+            openFileDialogLog.Filter = "日志文件|*.log";
+            // 
             // AircraftForm
             // 
             AutoScaleDimensions = new SizeF(9F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ControlLight;
             ClientSize = new Size(600, 550);
+            Controls.Add(buttonLog);
             Controls.Add(buttonExport);
             Controls.Add(labelManual);
             Controls.Add(labelAltDes2);
@@ -317,5 +335,7 @@
         private Label labelManual;
         private Button buttonExport;
         private SaveFileDialog saveFileDialog1;
+        private Button buttonLog;
+        private OpenFileDialog openFileDialogLog;
     }
 }

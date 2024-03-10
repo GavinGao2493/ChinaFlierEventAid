@@ -244,7 +244,61 @@ namespace EventAidForm
         {
             saveFileDialog1.FileName = "AircraftList.xls";
             DialogResult result = saveFileDialog1.ShowDialog();
-            if (result == DialogResult.Cancel) 
+            if (result == DialogResult.Cancel)
+            {
+                MessageBox.Show("请选择输出文件！");
+                return;
+            }
+            ExportToExcel.CheckPointsToExcel(checkPoints, saveFileDialog1.FileName);
+            MessageBox.Show("导出成功！");
+        }
+
+        private void buttonLog_Click(object sender, EventArgs e)
+        {
+            if (listBox1.Items.Count == 0)
+            {
+                MessageBox.Show("请设置至少一个检查点");
+                return;
+            }
+            openFileDialogLog.FileName = "";
+            DialogResult pathResult = openFileDialogLog.ShowDialog();
+            if (pathResult == DialogResult.Cancel)
+            {
+                MessageBox.Show("请选择文件位置");
+                return;
+            }
+
+            string[] logContentLines;
+            try
+            {
+                // 使用StreamReader打开文件并读取内容
+                using (StreamReader reader = new StreamReader(openFileDialogLog.FileName))
+                {
+                    // 读取整个文件内容
+                    logContentLines = reader.ReadToEnd().Split('\n');
+                }
+            }
+            catch
+            {
+                MessageBox.Show("读取文件时出错！");
+                return;
+            }
+
+            foreach (string line in logContentLines)
+                if (!string.IsNullOrWhiteSpace(line) && line[0] == '[')
+                {
+                    AircraftList aircraftList = new AircraftList(line);
+                    foreach (var checkPoint in checkPoints)
+                    {
+                        List<Aircraft>? selectedAircrafts = aircraftList.GetInGivenAreaAircrafts(checkPoint.LAT,
+                            checkPoint.LNG, checkPoint.range, checkPoint.lowAlt, checkPoint.highAlt);
+                        checkPoint.UpdateCheckedAircrafts(selectedAircrafts);
+                    }
+                }
+
+            saveFileDialog1.FileName = "AircraftList.xls";
+            DialogResult result = saveFileDialog1.ShowDialog();
+            if (result == DialogResult.Cancel)
             {
                 MessageBox.Show("请选择输出文件！");
                 return;
