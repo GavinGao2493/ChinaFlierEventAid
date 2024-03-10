@@ -126,7 +126,8 @@ namespace EventAidForm
                 return;
             }
 
-            saveFileDialog1.FileName = "AtcList";
+            saveFileDialog1.FileName = DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString()
+                + DateTime.Now.Day.ToString() + "AtcList";
             DialogResult result = saveFileDialog1.ShowDialog(this);
             if (string.IsNullOrWhiteSpace(saveFileDialog1.FileName) || result == DialogResult.Cancel)
             {

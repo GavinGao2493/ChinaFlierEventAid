@@ -15,6 +15,7 @@ namespace EventAidForm
     {
         List<CheckPoint> checkPoints = new List<CheckPoint>();
         string logFileName = "";
+        bool isDataExisted = false;
         public AircraftForm()
         {
             InitializeComponent();
@@ -165,13 +166,17 @@ namespace EventAidForm
                 MessageBox.Show("请设置至少一个检查点");
                 return;
             }
-            DialogResult result = MessageBox.Show("此操作将会覆盖原有记录，是否继续", "确认", MessageBoxButtons.YesNo);
-            if (result == DialogResult.No)
-                return;
+            if (!isDataExisted)
+            {
+                DialogResult result = MessageBox.Show("此操作将会覆盖原有记录，是否继续", "确认", MessageBoxButtons.YesNo);
+                if (result == DialogResult.No)
+                    return;
+            }
 
             timer1.Start();
             buttonStart.Enabled = false;
             buttonExport.Enabled = false;
+            buttonLog.Enabled = false;
             listBox1.Enabled = false;
             textBoxName.Enabled = false;
             textBoxLat.Enabled = false;
@@ -208,7 +213,7 @@ namespace EventAidForm
                 return;
             timer1.Stop();
             buttonStart.Enabled = true;
-            buttonEnd.Enabled = true;
+            buttonLog.Enabled = true;
             buttonExport.Enabled = true;
             listBox1.Enabled = true;
             textBoxName.Enabled = true;
@@ -219,6 +224,7 @@ namespace EventAidForm
             textBoxRange.Enabled = true;
             buttonEnd.Enabled = false;
             buttonStart.Text = "开始检测";
+            isDataExisted = true;
         }
         private static void WriteLog(string filePath, string message)
         {
@@ -242,7 +248,8 @@ namespace EventAidForm
 
         private void buttonExport_Click(object sender, EventArgs e)
         {
-            saveFileDialog1.FileName = "AircraftList.xls";
+            saveFileDialog1.FileName = DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString()
+                + DateTime.Now.Day.ToString() + "AircraftList.xls";
             DialogResult result = saveFileDialog1.ShowDialog();
             if (result == DialogResult.Cancel)
             {

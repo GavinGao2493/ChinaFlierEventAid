@@ -159,5 +159,12 @@ namespace ConsoleVersion
         {
             return checkedAircraft;
         }
+        /// <summary>
+        /// 清除数据（初始化）
+        /// </summary>
+        public void Clear()
+        {
+            checkedAircraft = new List<CheckRecords>();
+        }
     }
 }
