@@ -90,6 +90,7 @@
             textBoxName.Name = "textBoxName";
             textBoxName.Size = new Size(125, 27);
             textBoxName.TabIndex = 3;
+            textBoxName.Leave += textBoxName_Leave;
             // 
             // labelLat
             // 
@@ -112,6 +113,7 @@
             // textBoxLat
             // 
             textBoxLat.Location = new Point(341, 100);
+            textBoxLat.MaxLength = 10;
             textBoxLat.Name = "textBoxLat";
             textBoxLat.Size = new Size(125, 27);
             textBoxLat.TabIndex = 6;
@@ -120,6 +122,7 @@
             // textBoxLon
             // 
             textBoxLon.Location = new Point(341, 145);
+            textBoxLon.MaxLength = 10;
             textBoxLon.Name = "textBoxLon";
             textBoxLon.Size = new Size(125, 27);
             textBoxLon.TabIndex = 7;

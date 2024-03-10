@@ -8,6 +8,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
+using Xp2EsNewClassLib;
 
 namespace EventAidForm
 {
@@ -16,9 +18,20 @@ namespace EventAidForm
         List<CheckPoint> checkPoints = new List<CheckPoint>();
         string logFileName = "";
         bool isDataExisted = false;
+        Airports? airports = null;
         public AircraftForm()
         {
             InitializeComponent();
+            try
+            {
+                // 使用StreamReader打开文件并读取内容
+                using (StreamReader reader = new StreamReader("Airports.csv"))
+                {
+                    // 读取整个文件内容，并添加数据
+                    airports = new Airports(reader.ReadToEnd());
+                }
+            }
+            catch { }
         }
 
         private void AircraftForm_Load(object sender, EventArgs e)
@@ -78,7 +91,11 @@ namespace EventAidForm
                     highAlt = Convert.ToInt32(textBoxHighAlt.Text);
                 checkPoints.Add(new CheckPoint(textBoxName.Text, Convert.ToDouble(textBoxLat.Text),
                     Convert.ToDouble(textBoxLon.Text), Convert.ToInt32(textBoxRange.Text), lowAlt, highAlt));
+
                 listBox1.Items.Add(textBoxName.Text);
+
+                textBoxName.Text = ""; textBoxLat.Text = ""; textBoxLon.Text = "";
+                textBoxLowAlt.Text = ""; textBoxHighAlt.Text = ""; textBoxRange.Text = "";
             }
         }
 
@@ -294,7 +311,7 @@ namespace EventAidForm
             DateTime dateTime = DateTime.Now;
             foreach (string line in logContentLines)
                 if (!string.IsNullOrWhiteSpace(line))
-                    if (line[0]  == '[')
+                    if (line[0] == '[')
                     {
                         AircraftList aircraftList = new AircraftList(line);
                         foreach (var checkPoint in checkPoints)
@@ -323,6 +340,36 @@ namespace EventAidForm
             }
             ExportToExcel.CheckPointsToExcel(checkPoints, saveFileDialog1.FileName);
             MessageBox.Show("导出成功！");
+        }
+
+        private void textBoxName_Leave(object sender, EventArgs e)
+        {
+            if (airports == null) return;
+            string[] airportDataSctSingle = airports.GetAirportsDataForSct().Split('\n');
+
+            // 第0行为标题，舍去
+            for (int i = 1; i < airportDataSctSingle.Length; i++)
+                if (!string.IsNullOrWhiteSpace(airportDataSctSingle[i]) 
+                    && (airportDataSctSingle[i].Substring(0, 4) == textBoxName.Text 
+                    || airportDataSctSingle[i].Substring(0, 4) == textBoxName.Text.ToUpper()))
+                {
+                    if (textBoxName.Text != textBoxName.Text.ToUpper())
+                        textBoxName.Text = textBoxName.Text.ToUpper();
+
+                    string[] singleData = airportDataSctSingle[i].Split(' ');
+                    double airportLat, airportLng;
+                    (airportLat, airportLng) = CoordinationTransform.FromEuroscopeToDouble(singleData[2], singleData[3]);
+                    textBoxLat.Text = airportLat.ToString();
+                    textBoxLon.Text = airportLng.ToString();
+
+                    if (textBoxLat.Text.Length > 10)
+                        textBoxLat.Text = textBoxLat.Text.Substring(0, 10);
+                    if (textBoxLon.Text.Length > 10)
+                        textBoxLon.Text = textBoxLon.Text.Substring(0, 10);
+
+                    textBoxLowAlt.Focus();
+                    return;
+                }
         }
     }
 }

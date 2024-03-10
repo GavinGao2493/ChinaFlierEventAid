@@ -35,4 +35,10 @@
     <ProjectReference Include="..\ConsoleVersion\ConsoleVersion.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="Xp2EsNewClassLib">
+      <HintPath>..\..\..\..\Desktop\工作资料\XPlane2Euroscope\ConsoleVersion\Xp2EsNewClassLib\bin\Debug\Xp2EsNewClassLib.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>
