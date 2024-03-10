@@ -33,13 +33,27 @@ namespace ConsoleVersion
             outBoundTime = DateTime.Now;
         }
         /// <summary>
-        /// 更新最新时间
+        /// 更新最新时间与最新飞行计划
         /// </summary>
-        public void UpdateRecords()
+        public void UpdateRecords(Aircraft aircraft)
         {
             if (inBoundTime == new DateTime(2000, 1, 1))
                 inBoundTime = DateTime.Now;
             outBoundTime = DateTime.Now;
+            
+            // 更新起飞机场与目的地机场
+            if (this.aircraft.AirportD != aircraft.AirportD)
+            {
+                this.aircraft.AirportD = aircraft.AirportD;
+                this.aircraft.AirportDIATA = aircraft.AirportDIATA;
+                this.aircraft.AirportDName = aircraft.AirportDName;
+            }
+            if (this.aircraft.AirportA != aircraft.AirportA)
+            {
+                this.aircraft.AirportA = aircraft.AirportA;
+                this.aircraft.AirportAIATA = aircraft.AirportAIATA;
+                this.aircraft.AirportAName = aircraft.AirportAName;
+            }
         }
         /// <summary>
         /// 使用元组的方式返回机组进入和离开范围时间
@@ -89,7 +103,7 @@ namespace ConsoleVersion
                 if (GetAddedAircraftIndex(aircraft, checkedAircraft) == -1)
                     checkedAircraft.Add(new CheckRecords(aircraft));
                 else
-                    checkedAircraft[GetAddedAircraftIndex(aircraft, checkedAircraft)].UpdateRecords();
+                    checkedAircraft[GetAddedAircraftIndex(aircraft, checkedAircraft)].UpdateRecords(aircraft);
         }
         /// <summary>
         /// 取机组索引
