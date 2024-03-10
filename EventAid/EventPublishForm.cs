@@ -55,7 +55,6 @@ namespace EventAidForm
             }
             catch
             {
-                MessageBox.Show("打开用户文件失败，请手动登录！");
                 return;
             }
 
