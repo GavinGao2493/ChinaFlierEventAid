@@ -28,7 +28,8 @@
 
 ### ATC Online
 
-ATC Online页面可供用户导出在线管制员名单	<img src="C:\Users\Gavin Gao\AppData\Roaming\Typora\typora-user-images\image-20240310213257355.png" alt="image-20240310213257355" style="zoom: 80%;" />
+ATC Online页面可供用户导出在线管制员名单	<img src="![image](https://github.com/GavinGao2493/ChinaFlierEventAid/assets/27134616/37cf9a93-38cb-4242-99e0-3458f63bd29b)
+" alt="image-20240310213257355" style="zoom: 80%;" />
 
 首先，添加起飞机场与落地机场。注意，此处的起飞机场与落地机场可以填写多条，若填写错误，可以双击错误项删除。
 添加完成后，即可点击导出按钮，此时便会将当前时刻在线的管制员按照用户设置的起飞落地机场分类后显示在Excel文档中。
