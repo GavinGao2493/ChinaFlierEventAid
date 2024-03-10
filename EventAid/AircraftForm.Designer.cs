@@ -50,8 +50,8 @@
             labelAltDes1 = new Label();
             labelAltDes2 = new Label();
             labelManual = new Label();
-            folderBrowserDialog1 = new FolderBrowserDialog();
             buttonExport = new Button();
+            saveFileDialog1 = new SaveFileDialog();
             SuspendLayout();
             // 
             // labelCheckPoint
@@ -240,11 +240,6 @@
             labelManual.TabIndex = 19;
             labelManual.Text = "说明：\r\n1、检查点名称可自定义，如CheckPoint1、ZBAA等\r\n2、双击列表项可删除选中的检查点\r\n3、经纬度统一以度为单位，如30.06666\r\n4、最低/最高高度单位为英尺、水平范围单位为千米\r\n";
             // 
-            // folderBrowserDialog1
-            // 
-            folderBrowserDialog1.Description = "请选择输出文件夹";
-            folderBrowserDialog1.InitialDirectory = "Desktop";
-            // 
             // buttonExport
             // 
             buttonExport.Enabled = false;
@@ -255,6 +250,12 @@
             buttonExport.Text = "导出数据";
             buttonExport.UseVisualStyleBackColor = true;
             buttonExport.Click += buttonExport_Click;
+            // 
+            // saveFileDialog1
+            // 
+            saveFileDialog1.DefaultExt = "xls";
+            saveFileDialog1.FileName = "AircraftList";
+            saveFileDialog1.Filter = "Excel 97-2003 工作簿|*.xls";
             // 
             // AircraftForm
             // 
@@ -314,7 +315,7 @@
         private Label labelAltDes1;
         private Label labelAltDes2;
         private Label labelManual;
-        private FolderBrowserDialog folderBrowserDialog1;
         private Button buttonExport;
+        private SaveFileDialog saveFileDialog1;
     }
 }

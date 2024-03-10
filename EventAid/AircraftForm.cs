@@ -242,14 +242,14 @@ namespace EventAidForm
 
         private void buttonExport_Click(object sender, EventArgs e)
         {
-            folderBrowserDialog1.SelectedPath = "";
-            DialogResult result = folderBrowserDialog1.ShowDialog();
-            if (result == DialogResult.Cancel)
+            saveFileDialog1.FileName = "AircraftList.xls";
+            DialogResult result = saveFileDialog1.ShowDialog();
+            if (result == DialogResult.Cancel) 
             {
-                MessageBox.Show("请选择输出文件夹！");
+                MessageBox.Show("请选择输出文件！");
                 return;
             }
-            ExportToExcel.CheckPointsToExcel(checkPoints, folderBrowserDialog1.SelectedPath);
+            ExportToExcel.CheckPointsToExcel(checkPoints, saveFileDialog1.FileName);
             MessageBox.Show("导出成功！");
         }
     }

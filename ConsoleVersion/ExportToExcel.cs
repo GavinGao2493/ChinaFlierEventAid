@@ -232,15 +232,15 @@ namespace ConsoleVersion
         /// </summary>
         /// <param name="checkPoint"></param>
         /// <returns></returns>
-        public static bool CheckPointsToExcel(List<CheckPoint> checkPoints, string outputPath = "Output")
+        public static bool CheckPointsToExcel(List<CheckPoint> checkPoints, string outputPath = @"Output\AircraftList.xls")
         {
             if (checkPoints.Count ==  0)    return false;
+            IWorkbook workbook = new HSSFWorkbook();
 
             foreach (var checkPoint in checkPoints)
             {
-                bool result = false;
+                
                 List<CheckRecords> aircraftList = checkPoint.GetCheckPoinrRecords();
-                IWorkbook workbook = new HSSFWorkbook();
                 ISheet sheet = workbook.CreateSheet(checkPoint.checkPointName);  // 创建一个名称为checkPoint的表;
                 IRow row = sheet.CreateRow(0);  // 第一行写标题
                 row.CreateCell(0).SetCellValue("机组呼号"); // 第一列标题
@@ -262,15 +262,16 @@ namespace ConsoleVersion
                     row.CreateCell(4).SetCellValue(Convert.ToString(inboundTime));    // 第五列的值
                     row.CreateCell(5).SetCellValue(Convert.ToString(outbounTime));    // 第六列的值
                 }
-                // 文件写入的位置
-                using (FileStream fs = File.OpenWrite(outputPath + "\\" + checkPoint.checkPointName + ".xls"))
-                {
-                    workbook.Write(fs); // 向打开的这个xls文件中写入数据  
-                    result = true;
-                }
-                if (!result)    return false;
             }
-            return true;
+            bool result = false;
+
+            // 文件写入的位置
+            using (FileStream fs = File.OpenWrite(outputPath))
+            {
+                workbook.Write(fs); // 向打开的这个xls文件中写入数据  
+                result = true;
+            }
+            return result;
         }
         /// <summary>
         /// 判断呼号内是否包含机场ICAO码
