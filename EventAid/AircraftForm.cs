@@ -284,19 +284,30 @@ namespace EventAidForm
                 return;
             }
 
+            DateTime dateTime = DateTime.Now;
             foreach (string line in logContentLines)
-                if (!string.IsNullOrWhiteSpace(line) && line[0] == '[')
-                {
-                    AircraftList aircraftList = new AircraftList(line);
-                    foreach (var checkPoint in checkPoints)
+                if (!string.IsNullOrWhiteSpace(line))
+                    if (line[0]  == '[')
                     {
-                        List<Aircraft>? selectedAircrafts = aircraftList.GetInGivenAreaAircrafts(checkPoint.LAT,
-                            checkPoint.LNG, checkPoint.range, checkPoint.lowAlt, checkPoint.highAlt);
-                        checkPoint.UpdateCheckedAircrafts(selectedAircrafts);
+                        AircraftList aircraftList = new AircraftList(line);
+                        foreach (var checkPoint in checkPoints)
+                        {
+                            List<Aircraft>? selectedAircrafts = aircraftList.GetInGivenAreaAircrafts(checkPoint.LAT,
+                                checkPoint.LNG, checkPoint.range, checkPoint.lowAlt, checkPoint.highAlt);
+                            checkPoint.UpdateCheckedAircrafts(selectedAircrafts, dateTime);
+                        }
                     }
-                }
+                    else
+                    {
+                        long unixTimestamp = long.Parse(Path.GetFileNameWithoutExtension(openFileDialogLog.FileName));
+                        DateTime dateTimeStart = DateTimeOffset.FromUnixTimeSeconds(unixTimestamp).DateTime;
+                        string[] splitedTime = line.Split(':');
+                        dateTime = new DateTime(dateTimeStart.Year, dateTimeStart.Month, dateTimeStart.Day,
+                            int.Parse(splitedTime[0]), int.Parse(splitedTime[1]), int.Parse(splitedTime[2]));
+                    }
 
-            saveFileDialog1.FileName = "AircraftList.xls";
+            saveFileDialog1.FileName = DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString()
+                + DateTime.Now.Day.ToString() + "AircraftList.xls";
             DialogResult result = saveFileDialog1.ShowDialog();
             if (result == DialogResult.Cancel)
             {

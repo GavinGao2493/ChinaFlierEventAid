@@ -32,15 +32,41 @@ namespace ConsoleVersion
             inBoundTime = DateTime.Now;
             outBoundTime = DateTime.Now;
         }
+        public CheckRecords(Aircraft aircraft, DateTime dateTime)
+        {
+            this.aircraft = aircraft;
+            inBoundTime = dateTime;
+            outBoundTime = dateTime;
+        }
         /// <summary>
         /// 更新最新时间与最新飞行计划
         /// </summary>
+        public void UpdateRecords(Aircraft aircraft, DateTime dateTime)
+        {
+            if (inBoundTime == new DateTime(2000, 1, 1))
+                inBoundTime = dateTime;
+            outBoundTime = dateTime;
+            
+            // 更新起飞机场与目的地机场
+            if (this.aircraft.AirportD != aircraft.AirportD)
+            {
+                this.aircraft.AirportD = aircraft.AirportD;
+                this.aircraft.AirportDIATA = aircraft.AirportDIATA;
+                this.aircraft.AirportDName = aircraft.AirportDName;
+            }
+            if (this.aircraft.AirportA != aircraft.AirportA)
+            {
+                this.aircraft.AirportA = aircraft.AirportA;
+                this.aircraft.AirportAIATA = aircraft.AirportAIATA;
+                this.aircraft.AirportAName = aircraft.AirportAName;
+            }
+        }
         public void UpdateRecords(Aircraft aircraft)
         {
             if (inBoundTime == new DateTime(2000, 1, 1))
                 inBoundTime = DateTime.Now;
             outBoundTime = DateTime.Now;
-            
+
             // 更新起飞机场与目的地机场
             if (this.aircraft.AirportD != aircraft.AirportD)
             {
@@ -104,6 +130,15 @@ namespace ConsoleVersion
                     checkedAircraft.Add(new CheckRecords(aircraft));
                 else
                     checkedAircraft[GetAddedAircraftIndex(aircraft, checkedAircraft)].UpdateRecords(aircraft);
+        }
+        public void UpdateCheckedAircrafts(List<Aircraft>? aircrafts, DateTime dateTime)
+        {
+            if (aircrafts == null) return;
+            foreach (var aircraft in aircrafts)
+                if (GetAddedAircraftIndex(aircraft, checkedAircraft) == -1)
+                    checkedAircraft.Add(new CheckRecords(aircraft, dateTime));
+                else
+                    checkedAircraft[GetAddedAircraftIndex(aircraft, checkedAircraft)].UpdateRecords(aircraft, dateTime);
         }
         /// <summary>
         /// 取机组索引
