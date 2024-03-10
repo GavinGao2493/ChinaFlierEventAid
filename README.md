@@ -28,15 +28,19 @@
 
 ### ATC Online
 
-ATC Online页面可供用户导出在线管制员名单	<img src="https://github.com/GavinGao2493/ChinaFlierEventAid/assets/27134616/37cf9a93-38cb-4242-99e0-3458f63bd29b
-" alt="image-20240310213257355" style="zoom: 80%;" />
+ATC Online页面可供用户导出在线管制员名单 
+
+![image](https://github.com/GavinGao2493/ChinaFlierEventAid/assets/27134616/184c6b8d-fe9f-4e26-b764-d950ca6ba08f)
+
 
 首先，添加起飞机场与落地机场。注意，此处的起飞机场与落地机场可以填写多条，若填写错误，可以双击错误项删除。
 添加完成后，即可点击导出按钮，此时便会将当前时刻在线的管制员按照用户设置的起飞落地机场分类后显示在Excel文档中。
 
 ### Aircraft Detect
 
-Aircraft Detect页面可供用户导出机组列表	<img src="C:\Users\Gavin Gao\AppData\Roaming\Typora\typora-user-images\image-20240310214051605.png" alt="image-20240310214051605" style="zoom:80%;" />
+Aircraft Detect页面可供用户导出机组列表 
+
+![image](https://github.com/GavinGao2493/ChinaFlierEventAid/assets/27134616/16ad2823-ca5d-42b8-b419-84bd6f952c7a)
 
 导出机组列表的逻辑如下：
 
