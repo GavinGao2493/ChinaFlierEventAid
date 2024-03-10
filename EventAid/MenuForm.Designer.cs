@@ -35,6 +35,7 @@
             labelCopyright = new Label();
             labelEvent = new Label();
             pictureBoxEvent = new PictureBox();
+            linkLabelGithub = new LinkLabel();
             ((System.ComponentModel.ISupportInitialize)pictureBoxAtcForm).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBoxAircraft).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBoxEvent).BeginInit();
@@ -84,7 +85,7 @@
             // 
             labelCopyright.AutoSize = true;
             labelCopyright.ForeColor = Color.Gray;
-            labelCopyright.Location = new Point(12, 431);
+            labelCopyright.Location = new Point(12, 400);
             labelCopyright.Name = "labelCopyright";
             labelCopyright.Size = new Size(107, 40);
             labelCopyright.TabIndex = 5;
@@ -110,12 +111,24 @@
             pictureBoxEvent.TabIndex = 7;
             pictureBoxEvent.TabStop = false;
             // 
+            // linkLabelGithub
+            // 
+            linkLabelGithub.AutoSize = true;
+            linkLabelGithub.Location = new Point(12, 450);
+            linkLabelGithub.Name = "linkLabelGithub";
+            linkLabelGithub.Size = new Size(88, 20);
+            linkLabelGithub.TabIndex = 8;
+            linkLabelGithub.TabStop = true;
+            linkLabelGithub.Text = "Github主页";
+            linkLabelGithub.LinkClicked += linkLabelGithub_LinkClicked;
+            // 
             // MenuForm
             // 
             AutoScaleDimensions = new SizeF(9F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(38, 50, 56);
             ClientSize = new Size(200, 550);
+            Controls.Add(linkLabelGithub);
             Controls.Add(pictureBoxEvent);
             Controls.Add(labelEvent);
             Controls.Add(labelCopyright);
@@ -141,5 +154,6 @@
         private Label labelCopyright;
         private Label labelEvent;
         private PictureBox pictureBoxEvent;
+        private LinkLabel linkLabelGithub;
     }
 }

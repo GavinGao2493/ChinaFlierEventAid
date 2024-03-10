@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -151,6 +152,11 @@ namespace EventAidForm
             if (isLabelSelected[2]) return;
             labelEvent.ForeColor = Color.Gray;
             pictureBoxEvent.BackColor = Color.FromArgb(38, 50, 56);
+        }
+
+        private void linkLabelGithub_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Process.Start("https://github.com/GavinGao2493/ChinaFlierEventAid");
         }
     }
 }
