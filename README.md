@@ -5,8 +5,11 @@
 欢迎使用中国飞行者联盟活动管理中心辅助软件V1.1，下面将为用户介绍本软件的使用
 
 **Author:** 
+
 	Gavin Gao (CFR2493)
+ 
 **Open Source License Agreement:**
+
 	MIT license, Copyright © 2024 Gavin Gao
 
 
