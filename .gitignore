@@ -15,7 +15,7 @@
 *.jpg
 
 # User account files
-*.user
+*.usr
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs

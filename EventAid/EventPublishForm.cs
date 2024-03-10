@@ -41,11 +41,29 @@ namespace EventAidForm
 
         private void ChromeBrowser_FrameLoadEnd(object sender, FrameLoadEndEventArgs e)
         {
+            string username, password;
+            try
+            {
+                // 使用StreamReader打开文件并读取内容
+                using (StreamReader reader = new StreamReader("data.usr"))
+                {
+                    // 读取整个文件内容
+                    string[] tmpDate = reader.ReadToEnd().Split(' ');
+                    username = tmpDate[0];
+                    password = tmpDate[1];
+                }
+            }
+            catch
+            {
+                MessageBox.Show("打开用户文件失败，请手动登录！");
+                return;
+            }
+
             // 在框架加载完成后执行自动点击登录按钮的操作
             if (e.Frame.IsMain)
             {
-                chromeBrowser.ExecuteScriptAsync("document.getElementsByClassName('form-control')[0].value = 'CFR_admin'");
-                chromeBrowser.ExecuteScriptAsync("document.getElementsByClassName('form-control')[1].value = '123456789'");
+                chromeBrowser.ExecuteScriptAsync("document.getElementsByClassName('form-control')[0].value = '" + username + "'");
+                chromeBrowser.ExecuteScriptAsync("document.getElementsByClassName('form-control')[1].value = '"+ password +"'");
                 chromeBrowser.ExecuteScriptAsync("document.getElementsByClassName('btn btn-info btn-lg btn-block text-uppercase waves-effect waves-light')[0].click()");
                 chromeBrowser.ExecuteScriptAsync("document.getElementsByClassName('ti-file fa-fw')[0].click()");
             }

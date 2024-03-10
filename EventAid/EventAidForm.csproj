@@ -23,7 +23,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="logo.ico" />
+    <None Remove="logo.ico" />
+    <None Remove="logo.jpg" />
   </ItemGroup>
 
   <ItemGroup>
@@ -32,13 +33,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ConsoleVersion\ConsoleVersion.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Update="logo.jpg">
-      <Pack>True</Pack>
-      <PackagePath>\</PackagePath>
-    </None>
   </ItemGroup>
 
 </Project>
