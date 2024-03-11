@@ -1,15 +1,12 @@
 # 中国飞行者联盟活动管理中心辅助软件V1.1
 
 # 用户手册
-
 欢迎使用中国飞行者联盟活动管理中心辅助软件V1.1，下面将为用户介绍本软件的使用
 
-**Author:** 
-
+**Author:** </br>
 	Gavin Gao (CFR2493)
  
-**Open Source License Agreement:**
-
+**Open Source License Agreement:**</br>
 	MIT license, Copyright © 2024 Gavin Gao
 
 
@@ -18,12 +15,17 @@
 
 - **V1.1**
 
-​	新增Event Publish(活动发布)页面
-​	新增log自动记录功能
-​	新增从日志文件导出机组功能
-​	新增以机场ICAO代码为名称的检查点经纬度坐标自动填充功能
-​	进一步优化机组导出功能，将多文件方式修改为单文件多工作表方式
-​	将源代码开源至Github
+  新增Event Publish(活动发布)页面
+
+  新增log自动记录功能
+
+  新增从日志文件导出机组功能
+
+  新增以机场ICAO代码为名称的检查点经纬度坐标自动填充功能
+
+  进一步优化机组导出功能，将多文件方式修改为单文件多工作表方式
+
+  将源代码开源至Github
 
 - **V1.0**
 
